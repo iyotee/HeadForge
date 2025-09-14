@@ -60,6 +60,10 @@ jobs:
         cp store/headforge-firefox.zip release-packages/
         cp store/headforge-edge.zip release-packages/
         
+    - name: Create .crx files for direct installation
+      run: |
+        node scripts/create-crx-files.js
+        
     - name: Generate release notes
       id: release-notes
       run: |
@@ -81,12 +85,30 @@ jobs:
         - Improved update checker
         
         ### 📦 Downloads
-        - **Chrome Web Store**: [Download](https://chrome.google.com/webstore/detail/headforge/your-extension-id)
-        - **Firefox Add-ons**: [Download](https://addons.mozilla.org/en-US/firefox/addon/headforge/)
-        - **Microsoft Edge**: [Download](https://microsoftedge.microsoft.com/addons/detail/headforge/your-extension-id)
+        
+        **For Direct Installation (Recommended for Users):**
+        - **Chrome**: Download `headforge-chrome.crx` and drag to chrome://extensions/
+        - **Edge**: Download `headforge-edge.crx` and drag to edge://extensions/
+        - **Firefox**: Download `headforge-firefox.xpi` and drag to about:addons
+        
+        **For Store Submission (Developers/Partners):**
+        - **Chrome Web Store**: Use `headforge-chrome.zip`
+        - **Firefox Add-ons**: Use `headforge-firefox.zip`
+        - **Microsoft Edge**: Use `headforge-edge.zip`
         
         ### 📋 Installation Instructions
-        1. Download the appropriate package for your browser
+        
+        **Direct Installation (.crx/.xpi files):**
+        1. Download the install file for your browser (.crx for Chrome/Edge, .xpi for Firefox)
+        2. Open your browser's extension page:
+           - Chrome: chrome://extensions/
+           - Edge: edge://extensions/
+           - Firefox: about:addons
+        3. Drag and drop the file onto the page
+        4. Click "Add extension" when prompted
+        
+        **Developer Installation (.zip files):**
+        1. Download the ZIP file for your browser
         2. Extract the ZIP file
         3. Open your browser's extension management page
         4. Enable "Developer mode"
@@ -117,6 +139,9 @@ jobs:
           release-packages/headforge-chrome.zip
           release-packages/headforge-firefox.zip
           release-packages/headforge-edge.zip
+          release-packages/headforge-chrome.crx
+          release-packages/headforge-firefox.xpi
+          release-packages/headforge-edge.crx
         draft: false
         prerelease: ${{ github.event.inputs.prerelease == 'true' }}
         generate_release_notes: true
