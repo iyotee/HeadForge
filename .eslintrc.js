@@ -8,14 +8,20 @@ module.exports = {
   extends: [
     'eslint:recommended',
   ],
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
+    project: './tsconfig.json',
   },
+  plugins: [
+    '@typescript-eslint',
+  ],
   rules: {
     // Basic rules for extension development
     'no-console': 'off', // Allow console.log in extensions
-    'no-unused-vars': 'warn',
+    'no-unused-vars': 'off', // Use TypeScript version instead
+    '@typescript-eslint/no-unused-vars': 'warn',
     'no-undef': 'off', // TypeScript handles this
     'prefer-const': 'warn',
     'no-var': 'error',
