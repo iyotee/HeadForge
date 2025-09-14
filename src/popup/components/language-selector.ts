@@ -347,7 +347,7 @@ export class LanguageSelector {
         newIndex = Math.min(languageCards.length - 1, currentIndex + 1);
         break;
       case 'Enter':
-      case ' ':
+      case ' ': {
         e.preventDefault();
         const selectedCard = languageCards[currentIndex];
         if (selectedCard) {
@@ -357,6 +357,7 @@ export class LanguageSelector {
           }
         }
         return;
+      }
     }
 
     if (newIndex !== currentIndex && languageCards[newIndex]) {
