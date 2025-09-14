@@ -1,6 +1,6 @@
 # 🛠️ HeadForge
 
-[![Version](https://img.shields.io/badge/version-1.2.6-blue.svg)](https://github.com/iyotee/HeadForge/releases)
+[![Version](https://img.shields.io/badge/version-1.2.7-blue.svg)](https://github.com/iyotee/HeadForge/releases)
 [![License](https://img.shields.io/badge/license-GNU-green.svg)](LICENSE)
 [![Chrome Web Store](https://img.shields.io/badge/Chrome-Web%20Store-orange.svg)](https://chrome.google.com/webstore)
 [![Firefox Add-ons](https://img.shields.io/badge/Firefox-Add--ons-red.svg)](https://addons.mozilla.org)
@@ -33,7 +33,7 @@ HeadForge is a powerful browser extension that automatically generates professio
 - **Version Control** - Git-friendly headers
 - **Cross-platform** - Works on Windows, macOS, Linux
 
-## 🚀 Quick Start
+## 🚀🚀 Quick Start
 
 ### Installation
 
