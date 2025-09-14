@@ -5,10 +5,10 @@ yarn-debug.log*
 yarn-error.log*
 
 # Build outputs
-# dist/ (no longer used, using store/ instead)
+dist/
 packages/
-store/
-*.zip
+# store/ (we want to commit store packages)
+# *.zip (we want to commit store packages)
 
 # Environment variables
 .env
@@ -89,9 +89,9 @@ jspm_packages/
 # TernJS port file
 .tern-port
 
-# Stores
-store/
-*.zip
+# Stores (we want to commit store packages)
+# store/
+# *.zip
 
 # Temporary files
 tmp/

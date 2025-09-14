@@ -1,0 +1,14 @@
+{
+  "timestamp": "2025-09-14T11:04:32.358Z",
+  "version": "1.0.0",
+  "stores": [
+    "chrome",
+    "firefox",
+    "edge"
+  ],
+  "files": {
+    "chrome": 53,
+    "firefox": 53,
+    "edge": 53
+  }
+}
