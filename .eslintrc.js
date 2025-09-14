@@ -7,27 +7,26 @@ module.exports = {
   },
   extends: [
     'eslint:recommended',
-    '@typescript-eslint/recommended',
   ],
-  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: [
-    '@typescript-eslint',
-  ],
   rules: {
-    // Disable some strict rules for extension development
-    '@typescript-eslint/no-explicit-any': 'warn',
-    '@typescript-eslint/no-unused-vars': 'warn',
+    // Basic rules for extension development
     'no-console': 'off', // Allow console.log in extensions
+    'no-unused-vars': 'warn',
     'no-undef': 'off', // TypeScript handles this
+    'prefer-const': 'warn',
+    'no-var': 'error',
   },
   ignorePatterns: [
     'dist/',
     'store/',
     'node_modules/',
     '*.js', // Ignore JS files in root
+    'webpack.config.js',
+    'jest.config.js',
+    '.eslintrc.js',
   ],
 };
