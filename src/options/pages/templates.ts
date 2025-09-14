@@ -1,4 +1,4 @@
-import { LanguageConfig } from '@/types';
+// import { LanguageConfig } from '@/types';
 import { languageConfigs } from '@/utils/language-configs';
 
 export class TemplatesSettings {

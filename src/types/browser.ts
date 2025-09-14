@@ -565,4 +565,5 @@ export interface Chrome {
 }
 
 // Global chrome object
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 declare const chrome: Chrome;

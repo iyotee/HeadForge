@@ -315,7 +315,7 @@ export function extractVariables(template: string): string[] {
 }
 
 function generateCompleteTemplate(languageConfig: LanguageConfig): string {
-  const { commentStart, commentEnd, commentLine } = languageConfig;
+  const { commentLine } = languageConfig;
   
   // Determine the border character and format based on comment style
   let borderChar = '*';

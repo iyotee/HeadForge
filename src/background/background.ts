@@ -1,4 +1,4 @@
-import { Message, BrowserAPI } from '@/types';
+import { Message } from '@/types';
 import { MESSAGE_TYPES } from '@/utils/constants';
 
 class HeadForgeBackground {
@@ -379,8 +379,6 @@ class HeadForgeBackground {
     // Add migration logic for different versions
     if (!previousVersion) return;
 
-    const currentVersion = chrome.runtime.getManifest().version;
-    
     // Example migration logic
     if (this.isVersionLessThan(previousVersion, '1.1.0')) {
       // Migrate data from version < 1.1.0 to 1.1.0

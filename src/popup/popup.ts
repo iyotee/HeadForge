@@ -1,4 +1,4 @@
-import { HeaderData, LanguageConfig, UserPreferences, ExportOptions, Theme } from '@/types';
+import { HeaderData, LanguageConfig, UserPreferences, Theme } from '@/types';
 import { languageConfigs, getLanguageById } from '@/utils/language-configs';
 import { templateEngine } from '@/utils/template-engine';
 import { DateUtils } from '@/utils/date-utils';
@@ -9,7 +9,6 @@ import { UpdateCheckerUI } from './components/update-checker';
 import { 
   DEFAULT_VALUES, 
   STORAGE_KEYS, 
-  SUCCESS_MESSAGES, 
   ERROR_MESSAGES 
 } from '@/utils/constants';
 
@@ -386,8 +385,6 @@ export class HeadForgePopup {
         return;
       }
 
-      const headerContent = templateEngine.generateHeader(formData, this.currentLanguage!);
-      
       // Preview functionality removed
       
       // Enable copy and download buttons

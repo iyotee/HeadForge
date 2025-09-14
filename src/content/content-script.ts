@@ -1,5 +1,5 @@
 import { Message } from '@/types';
-import { MESSAGE_TYPES } from '@/utils/constants';
+// import { MESSAGE_TYPES } from '@/utils/constants';
 
 class HeadForgeContentScript {
   private isActive: boolean = false;
@@ -48,7 +48,7 @@ class HeadForgeContentScript {
 
   private async handleInsertHeader(payload: any): Promise<any> {
     try {
-      const { headerContent, language } = payload;
+      const { headerContent } = payload;
       
       if (!this.currentEditor) {
         throw new Error('No active editor detected');
