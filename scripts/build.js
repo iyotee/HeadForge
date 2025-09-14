@@ -24,8 +24,8 @@ class HeadForgeBuilder {
       // Validate builds
       await this.validateBuilds();
 
-      // Generate assets
-      await this.generateAssets();
+      // Generate assets (disabled for CI/CD)
+      // await this.generateAssets();
 
       console.log("\n✅ Build completed successfully!");
       console.log(`📦 Output directory: ${this.distDir}`);

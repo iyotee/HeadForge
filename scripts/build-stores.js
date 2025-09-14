@@ -165,9 +165,9 @@ function createStorePackages() {
         fs.unlinkSync(zipPath);
       }
 
-      // Create zip file
+      // Create zip file using zip command (Linux/Unix compatible)
       execSync(
-        `cd "${config.outputDir}" && powershell Compress-Archive -Path * -DestinationPath "${zipPath}"`,
+        `cd "${config.outputDir}" && zip -r "${zipPath}" . -x "*.DS_Store" "*.git*"`,
         { stdio: "inherit" }
       );
 
