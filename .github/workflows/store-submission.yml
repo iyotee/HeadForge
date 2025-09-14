@@ -14,23 +14,14 @@ on:
           - firefox
           - edge
           - all
-      version:
-        description: 'Version to submit'
-        required: true
-        type: string
-      release_notes:
-        description: 'Release notes for this submission'
-        required: true
-        type: string
 
 jobs:
-  submit-to-stores:
+  prepare-packages:
     runs-on: ubuntu-latest
-    if: github.event_name == 'release' || github.event_name == 'workflow_dispatch'
-    
-    strategy:
-      matrix:
-        store: ${{ github.event_name == 'release' && fromJSON('["chrome", "firefox", "edge"]') || fromJSON(format('["{0}"]', github.event.inputs.store)) }}
+    outputs:
+      chrome-zip: ${{ steps.prepare.outputs.chrome-zip }}
+      firefox-zip: ${{ steps.prepare.outputs.firefox-zip }}
+      edge-zip: ${{ steps.prepare.outputs.edge-zip }}
     
     steps:
     - name: Checkout code
@@ -51,15 +42,36 @@ jobs:
     - name: Build store packages
       run: node scripts/build-stores.js
       
-    - name: Download release assets
-      if: github.event_name == 'release'
+    - name: Prepare packages
+      id: prepare
+      run: |
+        echo "chrome-zip=store/headforge-chrome.zip" >> $GITHUB_OUTPUT
+        echo "firefox-zip=store/headforge-firefox.zip" >> $GITHUB_OUTPUT
+        echo "edge-zip=store/headforge-edge.zip" >> $GITHUB_OUTPUT
+        
+    - name: Upload packages
+      uses: actions/upload-artifact@v4
+      with:
+        name: store-packages
+        path: |
+          store/headforge-chrome.zip
+          store/headforge-firefox.zip
+          store/headforge-edge.zip
+        retention-days: 30
+
+  submit-chrome:
+    runs-on: ubuntu-latest
+    needs: prepare-packages
+    if: github.event_name == 'release' || (github.event_name == 'workflow_dispatch' && (github.event.inputs.store == 'chrome' || github.event.inputs.store == 'all'))
+    
+    steps:
+    - name: Download packages
       uses: actions/download-artifact@v4
       with:
-        name: build-artifacts-${{ github.run_number }}
+        name: store-packages
         path: store/
         
     - name: Submit to Chrome Web Store
-      if: matrix.store == 'chrome'
       uses: samuelmeuli/action-chrome-extension@v1
       with:
         extension-id: ${{ secrets.CHROME_EXTENSION_ID }}
@@ -69,8 +81,23 @@ jobs:
         zip-file: store/headforge-chrome.zip
         publish: true
         
+    - name: Notify Chrome success
+      if: success()
+      run: echo "✅ Successfully submitted to Chrome Web Store"
+
+  submit-firefox:
+    runs-on: ubuntu-latest
+    needs: prepare-packages
+    if: github.event_name == 'release' || (github.event_name == 'workflow_dispatch' && (github.event.inputs.store == 'firefox' || github.event.inputs.store == 'all'))
+    
+    steps:
+    - name: Download packages
+      uses: actions/download-artifact@v4
+      with:
+        name: store-packages
+        path: store/
+        
     - name: Submit to Firefox Add-ons
-      if: matrix.store == 'firefox'
       uses: add-ons/action@v1
       with:
         source: store/headforge-firefox.zip
@@ -78,8 +105,23 @@ jobs:
         api-key: ${{ secrets.FIREFOX_API_KEY }}
         api-secret: ${{ secrets.FIREFOX_API_SECRET }}
         
+    - name: Notify Firefox success
+      if: success()
+      run: echo "✅ Successfully submitted to Firefox Add-ons"
+
+  submit-edge:
+    runs-on: ubuntu-latest
+    needs: prepare-packages
+    if: github.event_name == 'release' || (github.event_name == 'workflow_dispatch' && (github.event.inputs.store == 'edge' || github.event.inputs.store == 'all'))
+    
+    steps:
+    - name: Download packages
+      uses: actions/download-artifact@v4
+      with:
+        name: store-packages
+        path: store/
+        
     - name: Submit to Microsoft Edge Add-ons
-      if: matrix.store == 'edge'
       uses: microsoft/edge-extension-action@v1
       with:
         product-id: ${{ secrets.EDGE_PRODUCT_ID }}
@@ -88,14 +130,6 @@ jobs:
         access-token-url: ${{ secrets.EDGE_ACCESS_TOKEN_URL }}
         zip-file: store/headforge-edge.zip
         
-    - name: Notify submission success
+    - name: Notify Edge success
       if: success()
-      run: |
-        echo "✅ Successfully submitted to ${{ matrix.store }} store"
-        echo "🔗 Users will receive automatic updates through their browser"
-        
-    - name: Notify submission failure
-      if: failure()
-      run: |
-        echo "❌ Failed to submit to ${{ matrix.store }} store"
-        echo "📋 Check the logs for details"
+      run: echo "✅ Successfully submitted to Microsoft Edge Add-ons"

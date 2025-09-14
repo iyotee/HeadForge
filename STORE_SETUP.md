@@ -1,6 +1,34 @@
 # 🏪 Store Setup Guide
 
-This guide explains how to set up automatic submission to browser extension stores.
+This guide explains how to set up automatic submission to browser extension stores according to official requirements.
+
+## 📋 Prerequisites
+
+Before setting up automatic submission, ensure your extension meets all store requirements:
+
+### ✅ Manifest Requirements
+- **Manifest V3** compliant
+- **No deprecated fields** (`author` field removed)
+- **Proper permissions** (minimal required permissions)
+- **Valid icons** (16x16, 32x32, 48x48, 128x128)
+- **Descriptive content** (name, description, short_name)
+
+### ✅ Store-Specific Requirements
+
+#### Chrome Web Store
+- **Developer Account**: $5 one-time fee
+- **Review Process**: 1-3 business days
+- **Policies**: [Chrome Web Store Developer Policy](https://developer.chrome.com/docs/webstore/program-policies/)
+
+#### Firefox Add-ons
+- **Developer Account**: Free
+- **Review Process**: 1-7 business days
+- **Policies**: [Mozilla Add-on Policies](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/AMO/Policy)
+
+#### Microsoft Edge Add-ons
+- **Developer Account**: Free via Partner Center
+- **Review Process**: Up to 7 business days
+- **Policies**: [Microsoft Edge Extension Policies](https://learn.microsoft.com/en-us/microsoft-edge/extensions-chromium/publish/publish-extension)
 
 ## 🔑 Required Secrets
 
