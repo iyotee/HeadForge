@@ -19,7 +19,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # Build outputs
-dist/
+# dist/ (no longer used, using store/ instead)
 packages/
 store/
 *.zip

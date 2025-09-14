@@ -24,7 +24,8 @@ export function generateHeader(data: HeaderData, languageConfig: LanguageConfig)
     language: data.language,
     usage: data.usage,
     notes: data.notes,
-    todo: data.todo
+    todo: data.todo,
+    commentLine: languageConfig.commentLine
   };
 
   // Choose template based on header type
@@ -47,10 +48,27 @@ export function generateHeader(data: HeaderData, languageConfig: LanguageConfig)
     header = header.replace(new RegExp(placeholder, 'g'), value || '');
   });
 
+  // Remove lines with empty values (except commentLine)
+  header = removeEmptyLines(header);
+
   // Clean up empty lines and format
   header = formatHeader(header, languageConfig);
 
   return header;
+}
+
+function removeEmptyLines(header: string): string {
+  const lines = header.split('\n');
+  const filteredLines = lines.filter(line => {
+    const trimmedLine = line.trim();
+    // Keep the line if it's not empty and doesn't end with just a colon (empty field)
+    // Also remove lines that end with just a field name without value (like "@dependencies ")
+    return trimmedLine !== '' && 
+           !trimmedLine.match(/:\s*$/) && 
+           !trimmedLine.match(/@\w+\s*$/);
+  });
+  
+  return filteredLines.join('\n');
 }
 
 function formatHeader(header: string, languageConfig: LanguageConfig): string {
@@ -299,26 +317,40 @@ export function extractVariables(template: string): string[] {
 function generateCompleteTemplate(languageConfig: LanguageConfig): string {
   const { commentStart, commentEnd, commentLine } = languageConfig;
   
-  // Determine the border character based on comment style
+  // Determine the border character and format based on comment style
   let borderChar = '*';
-  if (commentLine === '#') {
-    borderChar = '#';
-  } else if (commentLine === '--') {
-    borderChar = '-';
-  }
+  let topBorder = '';
+  let bottomBorder = '';
   
-  // Create a complete template with decorative borders (semi-complete style)
-  const border = borderChar.repeat(60);
-  const emptyLine = `${commentLine} ${' '.repeat(58)}`;
+  if (commentLine === '#') {
+    // Python style
+    borderChar = '#';
+    topBorder = `"""${borderChar.repeat(60)}"""`;
+    bottomBorder = `"""${borderChar.repeat(60)}"""`;
+  } else if (commentLine === '--') {
+    // SQL style
+    borderChar = '-';
+    topBorder = `/*${borderChar.repeat(60)}*/`;
+    bottomBorder = `/*${borderChar.repeat(60)}*/`;
+  } else if (commentLine === '<!--') {
+    // HTML style
+    borderChar = '-';
+    topBorder = `<!${borderChar.repeat(60)}>`;
+    bottomBorder = `<!${borderChar.repeat(60)}>`;
+  } else {
+    // Default C/Java/JavaScript style
+    borderChar = '*';
+    topBorder = `/*${borderChar.repeat(60)}*/`;
+    bottomBorder = `/*${borderChar.repeat(60)}*/`;
+  }
   
   let template = '';
   
-  // Add decorative header with semi-complete borders
-  template += `${commentLine} ${border}\n`;
-  template += `${emptyLine}\n`;
-  template += `${commentLine} FileName : {{fileName}}\n`;
-  template += `${commentLine} ProjectName : {{project}}\n`;
+  // Add decorative header with borders
+  template += `${topBorder}\n`;
   template += `${commentLine} @author {{author}}\n`;
+  template += `${commentLine} @fileName {{fileName}}\n`;
+  template += `${commentLine} @projectName {{project}}\n`;
   template += `${commentLine} @version {{version}}\n`;
   template += `${commentLine} @description {{description}}\n`;
   template += `${commentLine} @created {{creationDate}}\n`;
@@ -329,8 +361,7 @@ function generateCompleteTemplate(languageConfig: LanguageConfig): string {
   template += `${commentLine} @dependencies {{dependencies}}\n`;
   template += `${commentLine} @notes {{notes}}\n`;
   template += `${commentLine} @todo {{todo}}\n`;
-  template += `${emptyLine}\n`;
-  template += `${commentLine} ${border}`;
+  template += `${bottomBorder}`;
   
   return template;
 }

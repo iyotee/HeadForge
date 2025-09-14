@@ -7,7 +7,6 @@ const { execSync } = require("child_process");
  * Creates optimized packages for each store with proper manifests
  */
 
-const BUILD_DIR = path.join(__dirname, "..", "dist");
 const STORES_DIR = path.join(__dirname, "..", "store");
 
 // Store configurations
@@ -15,18 +14,21 @@ const STORE_CONFIGS = {
   chrome: {
     name: "Chrome Web Store",
     manifest: "manifest.json",
+    sourceDir: path.join(STORES_DIR, "chrome"),
     outputDir: path.join(STORES_DIR, "chrome"),
     zipName: "headforge-chrome.zip",
   },
   firefox: {
     name: "Firefox Add-ons",
     manifest: "manifest-firefox.json",
+    sourceDir: path.join(STORES_DIR, "firefox"),
     outputDir: path.join(STORES_DIR, "firefox"),
     zipName: "headforge-firefox.zip",
   },
   edge: {
     name: "Microsoft Edge Add-ons",
     manifest: "manifest-edge.json",
+    sourceDir: path.join(STORES_DIR, "edge"),
     outputDir: path.join(STORES_DIR, "edge"),
     zipName: "headforge-edge.zip",
   },
@@ -35,17 +37,13 @@ const STORE_CONFIGS = {
 function cleanDirectories() {
   console.log("🧹 Cleaning previous builds...");
 
-  // Clean dist directory
-  if (fs.existsSync(BUILD_DIR)) {
-    fs.rmSync(BUILD_DIR, { recursive: true, force: true });
-  }
-
   // Clean store directories
-  Object.values(STORE_CONFIGS).forEach((config) => {
-    if (fs.existsSync(config.outputDir)) {
-      fs.rmSync(config.outputDir, { recursive: true, force: true });
+  for (const store of Object.keys(STORE_CONFIGS)) {
+    const storeDir = path.join(STORES_DIR, store);
+    if (fs.existsSync(storeDir)) {
+      fs.rmSync(storeDir, { recursive: true, force: true });
     }
-  });
+  }
 
   console.log("✅ Directories cleaned");
 }
@@ -72,7 +70,7 @@ function createStoreManifests() {
   // Chrome manifest (base)
   const chromeManifest = { ...baseManifest };
   fs.writeFileSync(
-    path.join(BUILD_DIR, "chrome", "manifest.json"),
+    path.join(STORES_DIR, "chrome", "manifest.json"),
     JSON.stringify(chromeManifest, null, 2)
   );
 
@@ -101,7 +99,7 @@ function createStoreManifests() {
   delete firefoxManifest.web_accessible_resources;
 
   fs.writeFileSync(
-    path.join(BUILD_DIR, "firefox", "manifest.json"),
+    path.join(STORES_DIR, "firefox", "manifest.json"),
     JSON.stringify(firefoxManifest, null, 2)
   );
 
@@ -112,7 +110,7 @@ function createStoreManifests() {
   };
 
   fs.writeFileSync(
-    path.join(BUILD_DIR, "edge", "manifest.json"),
+    path.join(STORES_DIR, "edge", "manifest.json"),
     JSON.stringify(edgeManifest, null, 2)
   );
 
@@ -123,7 +121,7 @@ function copyStoreFiles() {
   console.log("📦 Copying files for each store...");
 
   Object.entries(STORE_CONFIGS).forEach(([store, config]) => {
-    const sourceDir = path.join(BUILD_DIR, store);
+    const sourceDir = path.join(STORES_DIR, store);
     const targetDir = config.outputDir;
 
     // Create target directory

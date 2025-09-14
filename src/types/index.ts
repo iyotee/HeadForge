@@ -194,6 +194,7 @@ export interface TemplateVariables {
   usage: string;
   notes: string;
   todo: string;
+  commentLine: string;
 }
 
 export interface MessageResponse {

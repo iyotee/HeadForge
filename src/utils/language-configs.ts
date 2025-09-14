@@ -12,15 +12,14 @@ export const languageConfigs: LanguageConfigs = {
     commentStart: '/*',
     commentEnd: '*/',
     commentLine: '*',
-    template: '// {{author}} - {{fileName}}',
-    templateComplete: `/**
+    template: `/**
  * @author {{author}}
  * @fileName {{fileName}}
- * @projectName {{projectName}}
+ * @projectName {{project}}
  * @version {{version}}
  * @description {{description}}
- * @created {{created}}
- * @updated {{updated}}
+ * @created {{creationDate}}
+ * @updated {{lastUpdated}}
  * @license {{license}}
  * @status {{status}}
  * @usage {{usage}}
@@ -37,15 +36,14 @@ export const languageConfigs: LanguageConfigs = {
     commentStart: '/*',
     commentEnd: '*/',
     commentLine: '*',
-    template: '// {{author}} - {{fileName}}',
-    templateComplete: `/**
+    template: `/**
  * @author {{author}}
  * @fileName {{fileName}}
- * @projectName {{projectName}}
+ * @projectName {{project}}
  * @version {{version}}
  * @description {{description}}
- * @created {{created}}
- * @updated {{updated}}
+ * @created {{creationDate}}
+ * @updated {{lastUpdated}}
  * @license {{license}}
  * @status {{status}}
  * @usage {{usage}}
@@ -62,15 +60,29 @@ export const languageConfigs: LanguageConfigs = {
     commentStart: '#',
     commentEnd: '',
     commentLine: '#',
-    template: '# {{author}} - {{fileName}}',
+    template: `"""
+@author {{author}}
+@fileName {{fileName}}
+@projectName {{project}}
+@version {{version}}
+@description {{description}}
+@created {{creationDate}}
+@updated {{lastUpdated}}
+@license {{license}}
+@status {{status}}
+@usage {{usage}}
+@dependencies {{dependencies}}
+@notes {{notes}}
+@todo {{todo}}
+"""`,
     templateComplete: `"""
 @author {{author}}
 @fileName {{fileName}}
-@projectName {{projectName}}
+@projectName {{project}}
 @version {{version}}
 @description {{description}}
-@created {{created}}
-@updated {{updated}}
+@created {{creationDate}}
+@updated {{lastUpdated}}
 @license {{license}}
 @status {{status}}
 @usage {{usage}}
@@ -87,15 +99,14 @@ export const languageConfigs: LanguageConfigs = {
     commentStart: '/*',
     commentEnd: '*/',
     commentLine: '*',
-    template: '// {{author}} - {{fileName}}',
-    templateComplete: `/**
+    template: `/**
  * @author {{author}}
  * @fileName {{fileName}}
- * @projectName {{projectName}}
+ * @projectName {{project}}
  * @version {{version}}
  * @description {{description}}
- * @created {{created}}
- * @updated {{updated}}
+ * @created {{creationDate}}
+ * @updated {{lastUpdated}}
  * @license {{license}}
  * @status {{status}}
  * @usage {{usage}}
@@ -112,15 +123,14 @@ export const languageConfigs: LanguageConfigs = {
     commentStart: '/*',
     commentEnd: '*/',
     commentLine: '*',
-    template: '// {{author}} - {{fileName}}',
-    templateComplete: `/**
+    template: `/**
  * @author {{author}}
  * @fileName {{fileName}}
- * @projectName {{projectName}}
+ * @projectName {{project}}
  * @version {{version}}
  * @description {{description}}
- * @created {{created}}
- * @updated {{updated}}
+ * @created {{creationDate}}
+ * @updated {{lastUpdated}}
  * @license {{license}}
  * @status {{status}}
  * @usage {{usage}}
@@ -137,15 +147,14 @@ export const languageConfigs: LanguageConfigs = {
     commentStart: '/*',
     commentEnd: '*/',
     commentLine: '*',
-    template: '// {{author}} - {{fileName}}',
-    templateComplete: `/**
+    template: `/**
  * @author {{author}}
  * @fileName {{fileName}}
- * @projectName {{projectName}}
+ * @projectName {{project}}
  * @version {{version}}
  * @description {{description}}
- * @created {{created}}
- * @updated {{updated}}
+ * @created {{creationDate}}
+ * @updated {{lastUpdated}}
  * @license {{license}}
  * @status {{status}}
  * @usage {{usage}}
@@ -162,15 +171,14 @@ export const languageConfigs: LanguageConfigs = {
     commentStart: '/*',
     commentEnd: '*/',
     commentLine: '*',
-    template: '// {{author}} - {{fileName}}',
-    templateComplete: `/**
+    template: `/**
  * @author {{author}}
  * @fileName {{fileName}}
- * @projectName {{projectName}}
+ * @projectName {{project}}
  * @version {{version}}
  * @description {{description}}
- * @created {{created}}
- * @updated {{updated}}
+ * @created {{creationDate}}
+ * @updated {{lastUpdated}}
  * @license {{license}}
  * @status {{status}}
  * @usage {{usage}}
@@ -187,15 +195,14 @@ export const languageConfigs: LanguageConfigs = {
     commentStart: '/*',
     commentEnd: '*/',
     commentLine: '*',
-    template: '// {{author}} - {{fileName}}',
-    templateComplete: `/**
+    template: `/**
  * @author {{author}}
  * @fileName {{fileName}}
- * @projectName {{projectName}}
+ * @projectName {{project}}
  * @version {{version}}
  * @description {{description}}
- * @created {{created}}
- * @updated {{updated}}
+ * @created {{creationDate}}
+ * @updated {{lastUpdated}}
  * @license {{license}}
  * @status {{status}}
  * @usage {{usage}}
@@ -212,15 +219,14 @@ export const languageConfigs: LanguageConfigs = {
     commentStart: '/*',
     commentEnd: '*/',
     commentLine: '*',
-    template: '// {{author}} - {{fileName}}',
-    templateComplete: `/**
+    template: `/**
  * @author {{author}}
  * @fileName {{fileName}}
- * @projectName {{projectName}}
+ * @projectName {{project}}
  * @version {{version}}
  * @description {{description}}
- * @created {{created}}
- * @updated {{updated}}
+ * @created {{creationDate}}
+ * @updated {{lastUpdated}}
  * @license {{license}}
  * @status {{status}}
  * @usage {{usage}}
@@ -237,15 +243,14 @@ export const languageConfigs: LanguageConfigs = {
     commentStart: '/*',
     commentEnd: '*/',
     commentLine: '*',
-    template: '// {{author}} - {{fileName}}',
-    templateComplete: `/**
+    template: `/**
  * @author {{author}}
  * @fileName {{fileName}}
- * @projectName {{projectName}}
+ * @projectName {{project}}
  * @version {{version}}
  * @description {{description}}
- * @created {{created}}
- * @updated {{updated}}
+ * @created {{creationDate}}
+ * @updated {{lastUpdated}}
  * @license {{license}}
  * @status {{status}}
  * @usage {{usage}}
@@ -262,15 +267,29 @@ export const languageConfigs: LanguageConfigs = {
     commentStart: '#',
     commentEnd: '',
     commentLine: '#',
-    template: '# {{author}} - {{fileName}}',
+    template: `/**
+ * @author {{author}}
+ * @fileName {{fileName}}
+ * @projectName {{project}}
+ * @version {{version}}
+ * @description {{description}}
+ * @created {{creationDate}}
+ * @updated {{lastUpdated}}
+ * @license {{license}}
+ * @status {{status}}
+ * @usage {{usage}}
+ * @dependencies {{dependencies}}
+ * @notes {{notes}}
+ * @todo {{todo}}
+ */`,
     templateComplete: `=begin
 @author {{author}}
 @fileName {{fileName}}
-@projectName {{projectName}}
+@projectName {{project}}
 @version {{version}}
 @description {{description}}
-@created {{created}}
-@updated {{updated}}
+@created {{creationDate}}
+@updated {{lastUpdated}}
 @license {{license}}
 @status {{status}}
 @usage {{usage}}
@@ -287,15 +306,14 @@ export const languageConfigs: LanguageConfigs = {
     commentStart: '/*',
     commentEnd: '*/',
     commentLine: '*',
-    template: '// {{author}} - {{fileName}}',
-    templateComplete: `/**
+    template: `/**
  * @author {{author}}
  * @fileName {{fileName}}
- * @projectName {{projectName}}
+ * @projectName {{project}}
  * @version {{version}}
  * @description {{description}}
- * @created {{created}}
- * @updated {{updated}}
+ * @created {{creationDate}}
+ * @updated {{lastUpdated}}
  * @license {{license}}
  * @status {{status}}
  * @usage {{usage}}
@@ -312,15 +330,14 @@ export const languageConfigs: LanguageConfigs = {
     commentStart: '/*',
     commentEnd: '*/',
     commentLine: '*',
-    template: '// {{author}} - {{fileName}}',
-    templateComplete: `/**
+    template: `/**
  * @author {{author}}
  * @fileName {{fileName}}
- * @projectName {{projectName}}
+ * @projectName {{project}}
  * @version {{version}}
  * @description {{description}}
- * @created {{created}}
- * @updated {{updated}}
+ * @created {{creationDate}}
+ * @updated {{lastUpdated}}
  * @license {{license}}
  * @status {{status}}
  * @usage {{usage}}
@@ -336,16 +353,30 @@ export const languageConfigs: LanguageConfigs = {
     extension: '.html',
     commentStart: '<!--',
     commentEnd: '-->',
-    commentLine: '*',
-    template: '<!-- {{author}} - {{fileName}} -->',
+    commentLine: '<!--',
+    template: `<!--
+@author {{author}}
+@fileName {{fileName}}
+@projectName {{project}}
+@version {{version}}
+@description {{description}}
+@created {{creationDate}}
+@updated {{lastUpdated}}
+@license {{license}}
+@status {{status}}
+@usage {{usage}}
+@dependencies {{dependencies}}
+@notes {{notes}}
+@todo {{todo}}
+-->`,
     templateComplete: `<!--
 @author {{author}}
 @fileName {{fileName}}
-@projectName {{projectName}}
+@projectName {{project}}
 @version {{version}}
 @description {{description}}
-@created {{created}}
-@updated {{updated}}
+@created {{creationDate}}
+@updated {{lastUpdated}}
 @license {{license}}
 @status {{status}}
 @usage {{usage}}
@@ -362,15 +393,14 @@ export const languageConfigs: LanguageConfigs = {
     commentStart: '/*',
     commentEnd: '*/',
     commentLine: '*',
-    template: '/* {{author}} - {{fileName}} */',
-    templateComplete: `/**
+    template: `/*
  * @author {{author}}
  * @fileName {{fileName}}
- * @projectName {{projectName}}
+ * @projectName {{project}}
  * @version {{version}}
  * @description {{description}}
- * @created {{created}}
- * @updated {{updated}}
+ * @created {{creationDate}}
+ * @updated {{lastUpdated}}
  * @license {{license}}
  * @status {{status}}
  * @usage {{usage}}
@@ -387,15 +417,14 @@ export const languageConfigs: LanguageConfigs = {
     commentStart: '/*',
     commentEnd: '*/',
     commentLine: '*',
-    template: '/* {{author}} - {{fileName}} */',
-    templateComplete: `/**
+    template: `/*
  * @author {{author}}
  * @fileName {{fileName}}
- * @projectName {{projectName}}
+ * @projectName {{project}}
  * @version {{version}}
  * @description {{description}}
- * @created {{created}}
- * @updated {{updated}}
+ * @created {{creationDate}}
+ * @updated {{lastUpdated}}
  * @license {{license}}
  * @status {{status}}
  * @usage {{usage}}
@@ -412,15 +441,14 @@ export const languageConfigs: LanguageConfigs = {
     commentStart: '/*',
     commentEnd: '*/',
     commentLine: '*',
-    template: '// {{author}} - {{fileName}}',
-    templateComplete: `/**
+    template: `/**
  * @author {{author}}
  * @fileName {{fileName}}
- * @projectName {{projectName}}
+ * @projectName {{project}}
  * @version {{version}}
  * @description {{description}}
- * @created {{created}}
- * @updated {{updated}}
+ * @created {{creationDate}}
+ * @updated {{lastUpdated}}
  * @license {{license}}
  * @status {{status}}
  * @usage {{usage}}
@@ -437,15 +465,14 @@ export const languageConfigs: LanguageConfigs = {
     commentStart: '/*',
     commentEnd: '*/',
     commentLine: '*',
-    template: '// {{author}} - {{fileName}}',
-    templateComplete: `/**
+    template: `/**
  * @author {{author}}
  * @fileName {{fileName}}
- * @projectName {{projectName}}
+ * @projectName {{project}}
  * @version {{version}}
  * @description {{description}}
- * @created {{created}}
- * @updated {{updated}}
+ * @created {{creationDate}}
+ * @updated {{lastUpdated}}
  * @license {{license}}
  * @status {{status}}
  * @usage {{usage}}
@@ -461,23 +488,22 @@ export const languageConfigs: LanguageConfigs = {
     extension: '.sql',
     commentStart: '/*',
     commentEnd: '*/',
-    commentLine: '*',
-    template: '-- {{author}} - {{fileName}}',
-    templateComplete: `/**
- * @author {{author}}
- * @fileName {{fileName}}
- * @projectName {{projectName}}
- * @version {{version}}
- * @description {{description}}
- * @created {{created}}
- * @updated {{updated}}
- * @license {{license}}
- * @status {{status}}
- * @usage {{usage}}
- * @dependencies {{dependencies}}
- * @notes {{notes}}
- * @todo {{todo}}
- */`,
+    commentLine: '--',
+    template: `/*
+-- @author {{author}}
+-- @fileName {{fileName}}
+-- @projectName {{project}}
+-- @version {{version}}
+-- @description {{description}}
+-- @created {{creationDate}}
+-- @updated {{lastUpdated}}
+-- @license {{license}}
+-- @status {{status}}
+-- @usage {{usage}}
+-- @dependencies {{dependencies}}
+-- @notes {{notes}}
+-- @todo {{todo}}
+*/`,
     category: 'database'
   },
   bash: {
@@ -487,15 +513,28 @@ export const languageConfigs: LanguageConfigs = {
     commentStart: '#',
     commentEnd: '',
     commentLine: '#',
-    template: '# {{author}} - {{fileName}}',
+    template: `#!/bin/bash
+# @author {{author}}
+# @fileName {{fileName}}
+# @projectName {{project}}
+# @version {{version}}
+# @description {{description}}
+# @created {{creationDate}}
+# @updated {{lastUpdated}}
+# @license {{license}}
+# @status {{status}}
+# @usage {{usage}}
+# @dependencies {{dependencies}}
+# @notes {{notes}}
+# @todo {{todo}}`,
     templateComplete: `#!/bin/bash
 # @author {{author}}
 # @fileName {{fileName}}
-# @projectName {{projectName}}
+# @projectName {{project}}
 # @version {{version}}
 # @description {{description}}
-# @created {{created}}
-# @updated {{updated}}
+# @created {{creationDate}}
+# @updated {{lastUpdated}}
 # @license {{license}}
 # @status {{status}}
 # @usage {{usage}}
@@ -511,14 +550,27 @@ export const languageConfigs: LanguageConfigs = {
     commentStart: '#',
     commentEnd: '',
     commentLine: '#',
-    template: '# {{author}} - {{fileName}}',
-    templateComplete: `# @author {{author}}
+    template: `#!/bin/bash
+# @author {{author}}
 # @fileName {{fileName}}
-# @projectName {{projectName}}
+# @projectName {{project}}
 # @version {{version}}
 # @description {{description}}
-# @created {{created}}
-# @updated {{updated}}
+# @created {{creationDate}}
+# @updated {{lastUpdated}}
+# @license {{license}}
+# @status {{status}}
+# @usage {{usage}}
+# @dependencies {{dependencies}}
+# @notes {{notes}}
+# @todo {{todo}}`,
+    templateComplete: `# @author {{author}}
+# @fileName {{fileName}}
+# @projectName {{project}}
+# @version {{version}}
+# @description {{description}}
+# @created {{creationDate}}
+# @updated {{lastUpdated}}
 # @license {{license}}
 # @status {{status}}
 # @usage {{usage}}
@@ -534,14 +586,26 @@ export const languageConfigs: LanguageConfigs = {
     commentStart: '#',
     commentEnd: '',
     commentLine: '#',
-    template: '# {{author}} - {{fileName}}',
-    templateComplete: `# @author {{author}}
+    template: `# @author {{author}}
 # @fileName {{fileName}}
-# @projectName {{projectName}}
+# @projectName {{project}}
 # @version {{version}}
 # @description {{description}}
-# @created {{created}}
-# @updated {{updated}}
+# @created {{creationDate}}
+# @updated {{lastUpdated}}
+# @license {{license}}
+# @status {{status}}
+# @usage {{usage}}
+# @dependencies {{dependencies}}
+# @notes {{notes}}
+# @todo {{todo}}`,
+    templateComplete: `# @author {{author}}
+# @fileName {{fileName}}
+# @projectName {{project}}
+# @version {{version}}
+# @description {{description}}
+# @created {{creationDate}}
+# @updated {{lastUpdated}}
 # @license {{license}}
 # @status {{status}}
 # @usage {{usage}}
@@ -557,22 +621,23 @@ export const languageConfigs: LanguageConfigs = {
     commentStart: '/*',
     commentEnd: '*/',
     commentLine: '*',
-    template: '// {{author}} - {{fileName}}',
-    templateComplete: `/**
- * @author {{author}}
- * @fileName {{fileName}}
- * @projectName {{projectName}}
- * @version {{version}}
- * @description {{description}}
- * @created {{created}}
- * @updated {{updated}}
- * @license {{license}}
- * @status {{status}}
- * @usage {{usage}}
- * @dependencies {{dependencies}}
- * @notes {{notes}}
- * @todo {{todo}}
- */`,
+    template: `{
+  "_header": {
+    "author": "{{author}}",
+    "fileName": "{{fileName}}",
+    "projectName": "{{project}}",
+    "version": "{{version}}",
+    "description": "{{description}}",
+    "created": "{{creationDate}}",
+    "updated": "{{lastUpdated}}",
+    "license": "{{license}}",
+    "status": "{{status}}",
+    "usage": "{{usage}}",
+    "dependencies": "{{dependencies}}",
+    "notes": "{{notes}}",
+    "todo": "{{todo}}"
+  }
+}`,
     category: 'other'
   },
   xml: {
@@ -581,16 +646,30 @@ export const languageConfigs: LanguageConfigs = {
     extension: '.xml',
     commentStart: '<!--',
     commentEnd: '-->',
-    commentLine: '*',
-    template: '<!-- {{author}} - {{fileName}} -->',
+    commentLine: '<!--',
+    template: `<!--
+@author {{author}}
+@fileName {{fileName}}
+@projectName {{project}}
+@version {{version}}
+@description {{description}}
+@created {{creationDate}}
+@updated {{lastUpdated}}
+@license {{license}}
+@status {{status}}
+@usage {{usage}}
+@dependencies {{dependencies}}
+@notes {{notes}}
+@todo {{todo}}
+-->`,
     templateComplete: `<!--
 @author {{author}}
 @fileName {{fileName}}
-@projectName {{projectName}}
+@projectName {{project}}
 @version {{version}}
 @description {{description}}
-@created {{created}}
-@updated {{updated}}
+@created {{creationDate}}
+@updated {{lastUpdated}}
 @license {{license}}
 @status {{status}}
 @usage {{usage}}
@@ -606,16 +685,30 @@ export const languageConfigs: LanguageConfigs = {
     extension: '.md',
     commentStart: '<!--',
     commentEnd: '-->',
-    commentLine: '#',
-    template: '<!-- {{author}} - {{fileName}} -->',
+    commentLine: '<!--',
+    template: `/**
+ * @author {{author}}
+ * @fileName {{fileName}}
+ * @projectName {{project}}
+ * @version {{version}}
+ * @description {{description}}
+ * @created {{creationDate}}
+ * @updated {{lastUpdated}}
+ * @license {{license}}
+ * @status {{status}}
+ * @usage {{usage}}
+ * @dependencies {{dependencies}}
+ * @notes {{notes}}
+ * @todo {{todo}}
+ */`,
     templateComplete: `<!--
 @author {{author}}
 @fileName {{fileName}}
-@projectName {{projectName}}
+@projectName {{project}}
 @version {{version}}
 @description {{description}}
-@created {{created}}
-@updated {{updated}}
+@created {{creationDate}}
+@updated {{lastUpdated}}
 @license {{license}}
 @status {{status}}
 @usage {{usage}}
