@@ -62,7 +62,8 @@
     "validate-store": "node scripts/validate-store-requirements.js",
     "setup-secrets": "node scripts/setup-github-secrets.js",
     "create-crx": "node scripts/create-crx-files.js",
-    "create-manual-release": "node scripts/create-manual-release.js"
+    "create-manual-release": "node scripts/create-manual-release.js",
+    "push-tag": "node scripts/push-tag.js"
   },
   "devDependencies": {
     "@playwright/test": "^1.40.0",

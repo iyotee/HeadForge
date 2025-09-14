@@ -1,6 +1,6 @@
 # 🛠️ HeadForge
 
-[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/iyotee/HeadForge/releases)
+[![Version](https://img.shields.io/badge/version-1.2.4-blue.svg)](https://github.com/iyotee/HeadForge/releases)
 [![License](https://img.shields.io/badge/license-GNU-green.svg)](LICENSE)
 [![Chrome Web Store](https://img.shields.io/badge/Chrome-Web%20Store-orange.svg)](https://chrome.google.com/webstore)
 [![Firefox Add-ons](https://img.shields.io/badge/Firefox-Add--ons-red.svg)](https://addons.mozilla.org)
@@ -37,6 +37,14 @@ HeadForge is a powerful browser extension that automatically generates professio
 
 ### Installation
 
+#### **Direct Installation (Recommended)**
+1. **Download** the latest release from [GitHub Releases](https://github.com/iyotee/HeadForge/releases)
+2. **Choose** your browser's install file:
+   - **Chrome/Edge**: Download `headforge-chrome.crx` or `headforge-edge.crx`
+   - **Firefox**: Download `headforge-firefox.xpi`
+3. **Install** by dragging the file to your browser's extension page
+
+#### **Store Installation (Coming Soon)**
 1. **Chrome Web Store** - [Install from Chrome Web Store](https://chrome.google.com/webstore)
 2. **Firefox Add-ons** - [Install from Firefox Add-ons](https://addons.mozilla.org)
 3. **Microsoft Edge** - [Install from Edge Add-ons](https://microsoftedge.microsoft.com/addons)
@@ -178,9 +186,10 @@ This project is licensed under the GNU General Public License v3.0 - see the [LI
 ## 🔗 Links
 
 - **Website** - [headforge.dev](https://headforge.dev)
-- **Chrome Web Store** - [Install for Chrome](https://chrome.google.com/webstore)
-- **Firefox Add-ons** - [Install for Firefox](https://addons.mozilla.org)
-- **Microsoft Edge** - [Install for Edge](https://microsoftedge.microsoft.com/addons)
+- **GitHub Releases** - [Download latest version](https://github.com/iyotee/HeadForge/releases)
+- **Chrome Web Store** - [Install for Chrome](https://chrome.google.com/webstore) *(Coming Soon)*
+- **Firefox Add-ons** - [Install for Firefox](https://addons.mozilla.org) *(Coming Soon)*
+- **Microsoft Edge** - [Install for Edge](https://microsoftedge.microsoft.com/addons) *(Coming Soon)*
 - **GitHub** - [View source code](https://github.com/iyotee/HeadForge)
 
 ---

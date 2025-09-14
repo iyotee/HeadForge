@@ -32,25 +32,20 @@ if (newVersion === "patch") {
 console.log(`🏷️  Creating tag: ${newTag}`);
 
 try {
-  // Create and push tag
+  // Create tag only (don't push automatically)
   execSync(`git tag ${newTag}`, { stdio: "inherit" });
-  execSync(`git push origin ${newTag}`, { stdio: "inherit" });
 
-  console.log(`\n✅ Tag ${newTag} created and pushed successfully!`);
-  console.log(`\n🎉 GitHub Actions will now:`);
-  console.log(`   • Build the extension for all browsers`);
-  console.log(`   • Create store packages (Chrome, Firefox, Edge)`);
-  console.log(`   • Generate a release with all packages`);
-  console.log(`   • Upload artifacts for download`);
-
+  console.log(`\n✅ Tag ${newTag} created successfully!`);
   console.log(`\n📋 Next steps:`);
+  console.log(`   1. Push the tag manually: git push origin ${newTag}`);
+  console.log(`   2. This will trigger the release workflow`);
   console.log(
-    `   • Check GitHub Actions: https://github.com/iyotee/HeadForge/actions`
+    `   3. Check GitHub Actions: https://github.com/iyotee/HeadForge/actions`
   );
   console.log(
-    `   • Wait for release: https://github.com/iyotee/HeadForge/releases`
+    `   4. Wait for release: https://github.com/iyotee/HeadForge/releases`
   );
-  console.log(`   • Download packages from the release page`);
+  console.log(`\n🎯 This prevents conflicts between CI and Release workflows!`);
 } catch (error) {
   console.error("❌ Error creating release:", error.message);
   process.exit(1);
