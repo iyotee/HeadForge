@@ -1,48 +1,139 @@
-# 🔨 HeadForge - Professional Code Header Generator
+# 🛠️ HeadForge
 
-**Generate beautiful, professional code headers for multiple programming languages with ease.**
+[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/iyotee/HeadForge/releases)
+[![License](https://img.shields.io/badge/license-GNU-green.svg)](LICENSE)
+[![Chrome Web Store](https://img.shields.io/badge/Chrome-Web%20Store-orange.svg)](https://chrome.google.com/webstore)
+[![Firefox Add-ons](https://img.shields.io/badge/Firefox-Add--ons-red.svg)](https://addons.mozilla.org)
+[![Microsoft Edge](https://img.shields.io/badge/Edge-Add--ons-blue.svg)](https://microsoftedge.microsoft.com/addons)
 
-![License](https://img.shields.io/badge/license-GPL--3.0-blue.svg)
-![Version](https://img.shields.io/badge/version-1.0.0-green.svg)
-![Platform](https://img.shields.io/badge/platform-Chrome%20%7C%20Firefox%20%7C%20Edge%20%7C%20Brave-orange.svg)
+> **Professional code header generator browser extension for developers**
+
+HeadForge is a powerful browser extension that automatically generates professional code headers for 25+ programming languages. Perfect for developers who want to maintain consistent documentation standards across their projects.
 
 ## ✨ Features
 
-- **25+ Programming Languages** - JavaScript, TypeScript, Python, Java, C++, HTML, CSS, and more
-- **Professional Templates** - Clean, standardized header formats
-- **Cross-Browser Support** - Chrome, Firefox, Edge, Brave
-- **Dark/Light Theme** - Automatic theme detection
-- **Export Options** - Copy to clipboard, save as file, or insert into editor
-- **Customizable Fields** - Project, author, version, license, platform, and more
-- **Live Preview** - See your header before generating
-- **Form Validation** - Ensure all required fields are filled
-- **Auto-fill Dates** - Automatic creation and update dates
+### 🎯 **Core Functionality**
+- **25+ Programming Languages** - Support for JavaScript, Python, Java, C++, Go, Rust, and more
+- **Smart Template System** - Simple and complete header formats
+- **Real-time Preview** - See your header before generating
+- **One-click Copy** - Copy to clipboard instantly
+- **Export Options** - Save as files or copy to clipboard
 
-## 🚀 Installation
+### 🎨 **User Experience**
+- **Modern UI** - Clean, intuitive interface
+- **Dark/Light Themes** - Automatic theme detection
+- **Responsive Design** - Works on all screen sizes
+- **Keyboard Shortcuts** - Power user friendly
+- **Auto-updates** - Automatic update detection
 
-### From Browser Stores
-- **Chrome Web Store**: [Install HeadForge](https://chrome.google.com/webstore)
-- **Firefox Add-ons**: [Install HeadForge](https://addons.mozilla.org/firefox)
-- **Edge Add-ons**: [Install HeadForge](https://microsoftedge.microsoft.com/addons)
+### 🔧 **Developer Features**
+- **Custom Templates** - Create your own header formats
+- **Bulk Generation** - Generate multiple headers at once
+- **Project Integration** - Works with any code editor
+- **Version Control** - Git-friendly headers
+- **Cross-platform** - Works on Windows, macOS, Linux
 
-### Manual Installation
-1. Download the latest release from [GitHub Releases](https://github.com/satoshiba/headforge/releases)
-2. Extract the ZIP file
-3. Open your browser's extension management page
-4. Enable "Developer mode"
-5. Click "Load unpacked" and select the extracted folder
+## 🚀 Quick Start
 
-## 💻 Development
+### Installation
 
-### Prerequisites
-- Node.js 18+ and npm
-- Modern web browser with extension support
+1. **Chrome Web Store** - [Install from Chrome Web Store](https://chrome.google.com/webstore)
+2. **Firefox Add-ons** - [Install from Firefox Add-ons](https://addons.mozilla.org)
+3. **Microsoft Edge** - [Install from Edge Add-ons](https://microsoftedge.microsoft.com/addons)
 
-### Setup
+### Basic Usage
+
+1. **Open HeadForge** - Click the extension icon in your browser
+2. **Select Language** - Choose your programming language
+3. **Fill Details** - Enter project information
+4. **Generate Header** - Click "Generate" to create your header
+5. **Copy & Use** - Copy to clipboard and paste into your code
+
+## 📋 Supported Languages
+
+| Language | Simple Header | Complete Header | Comment Style |
+|----------|---------------|-----------------|---------------|
+| JavaScript | ✅ | ✅ | `//` |
+| TypeScript | ✅ | ✅ | `//` |
+| Python | ✅ | ✅ | `#` |
+| Java | ✅ | ✅ | `//` |
+| C++ | ✅ | ✅ | `//` |
+| C# | ✅ | ✅ | `//` |
+| Go | ✅ | ✅ | `//` |
+| Rust | ✅ | ✅ | `//` |
+| PHP | ✅ | ✅ | `//` |
+| Ruby | ✅ | ✅ | `#` |
+| Swift | ✅ | ✅ | `//` |
+| Kotlin | ✅ | ✅ | `//` |
+| Dart | ✅ | ✅ | `//` |
+| R | ✅ | ✅ | `#` |
+| MATLAB | ✅ | ✅ | `%` |
+| SQL | ✅ | ✅ | `--` |
+| HTML | ✅ | ✅ | `<!-- -->` |
+| CSS | ✅ | ✅ | `/* */` |
+| SCSS | ✅ | ✅ | `//` |
+| Less | ✅ | ✅ | `//` |
+| XML | ✅ | ✅ | `<!-- -->` |
+| YAML | ✅ | ✅ | `#` |
+| JSON | ✅ | ✅ | `//` |
+| Markdown | ✅ | ✅ | `<!-- -->` |
+| Shell | ✅ | ✅ | `#` |
+
+## 🎯 Use Cases
+
+### **Individual Developers**
+- Maintain consistent code documentation
+- Save time on repetitive header creation
+- Professional project presentation
+- Easy onboarding for new team members
+
+### **Development Teams**
+- Standardize code headers across projects
+- Improve code readability and maintainability
+- Reduce documentation overhead
+- Enhance team collaboration
+
+### **Open Source Projects**
+- Professional project appearance
+- Consistent contributor guidelines
+- Easy license and copyright management
+- Better project documentation
+
+## 🔧 Configuration
+
+### Theme Settings
+- **Auto** - Follows system theme
+- **Light** - Always light theme
+- **Dark** - Always dark theme
+
+### Template Customization
+- **Simple Headers** - Basic information only
+- **Complete Headers** - Full project details with decorative borders
+- **Custom Templates** - Create your own formats
+
+### Export Options
+- **Copy to Clipboard** - Instant copying
+- **Download as File** - Save to local filesystem
+- **Bulk Export** - Multiple files at once
+
+## 📖 Documentation
+
+- **[User Guide](docs/USER_GUIDE.md)** - Complete usage instructions
+- **[API Reference](docs/API_REFERENCE.md)** - Developer documentation
+- **[Installation Guide](docs/INSTALLATION.md)** - Setup instructions
+- **[Contributing](CONTRIBUTING.md)** - How to contribute
+- **[Changelog](CHANGELOG.md)** - Version history
+
+## 🤝 Contributing
+
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+
+### Development Setup
+
 ```bash
 # Clone the repository
-git clone https://github.com/satoshiba/headforge.git
-cd headforge
+git clone https://github.com/iyotee/HeadForge.git
+cd HeadForge
 
 # Install dependencies
 npm install
@@ -52,129 +143,52 @@ npm run dev
 
 # Build for production
 npm run build
-
-# Package for distribution
-npm run package:all
 ```
 
-### Project Structure
-```
-HeadForge/
-├── src/
-│   ├── popup/           # Extension popup
-│   ├── options/         # Options page
-│   ├── background/      # Background script
-│   ├── content/         # Content scripts
-│   ├── utils/           # Utility functions
-│   ├── styles/          # CSS styles
-│   └── manifest.json    # Extension manifest
-├── scripts/             # Build and utility scripts
-├── tests/               # Test files
-├── store/               # Store assets and descriptions
-└── docs/                # Documentation
+### Testing
+
+```bash
+# Run tests
+npm test
+
+# Run linting
+npm run lint
+
+# Run type checking
+npm run type-check
 ```
 
-## 🎯 Usage
-
-1. **Click the HeadForge icon** in your browser toolbar
-2. **Fill in the form fields**:
-   - File Name (required)
-   - Project Name (required)
-   - Author (required)
-   - Version (required)
-   - Programming Language (required)
-   - License (required)
-   - Status (required)
-   - Platform(s) (required)
-   - Optional: Description, Usage, Notes, TODO
-3. **Click "Generate"** to create your header
-4. **Preview** the generated header
-5. **Copy to clipboard** or **save as file**
-
-## 🛠️ Supported Languages
-
-| Language | Extension | Comment Style |
-|----------|-----------|---------------|
-| JavaScript | `.js` | `/* */` and `//` |
-| TypeScript | `.ts` | `/* */` and `//` |
-| Python | `.py` | `"""` and `#` |
-| Java | `.java` | `/** */` and `//` |
-| C++ | `.cpp` | `/* */` and `//` |
-| C# | `.cs` | `/* */` and `//` |
-| Go | `.go` | `/* */` and `//` |
-| Rust | `.rs` | `/* */` and `//` |
-| PHP | `.php` | `/* */` and `//` |
-| Ruby | `.rb` | `=begin =end` and `#` |
-| HTML | `.html` | `<!-- -->` |
-| CSS | `.css` | `/* */` |
-| SQL | `.sql` | `/* */` and `--` |
-| Bash | `.sh` | `#` |
-| PowerShell | `.ps1` | `<# #>` and `#` |
-| And more... | | |
-
-## 🎨 Customization
-
-### Themes
-- **Light Theme**: Clean, bright interface
-- **Dark Theme**: Easy on the eyes for dark environments
-- **Auto Theme**: Follows your system preference
-
-### Templates
-Create custom templates for your specific needs:
-1. Open Options page
-2. Go to Templates section
-3. Add new language or modify existing templates
-4. Save and use in the popup
-
-## 📝 License
+## 📄 License
 
 This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](LICENSE) file for details.
 
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-1. Fork the project
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 📚 Documentation
-
-- [API Reference](docs/API_REFERENCE.md)
-- [Architecture](docs/ARCHITECTURE.md)
-- [Contributing Guide](docs/CONTRIBUTING.md)
-- [Changelog](CHANGELOG.md)
-
-## 🐛 Bug Reports
-
-If you find a bug, please create an issue on [GitHub Issues](https://github.com/satoshiba/headforge/issues) with:
-- Browser and version
-- Extension version
-- Steps to reproduce
-- Expected vs actual behavior
-
-## 💡 Feature Requests
-
-Have an idea for a new feature? Create a feature request on [GitHub Issues](https://github.com/satoshiba/headforge/issues) with the `enhancement` label.
-
-## 📊 Stats
-
-- **25+** Supported programming languages
-- **4** Major browsers supported
-- **Cross-platform** Windows, macOS, Linux
-- **Lightweight** < 1MB extension size
-- **Fast** Generate headers in milliseconds
-
 ## 🙏 Acknowledgments
 
-- Icons by [Heroicons](https://heroicons.com/)
-- CSS framework inspired by [Tailwind CSS](https://tailwindcss.com/)
-- Built with modern web standards
+- **Contributors** - Thank you to all contributors who help improve HeadForge
+- **Community** - Thanks to the developer community for feedback and suggestions
+- **Open Source** - Built with open source tools and libraries
+
+## 📞 Support
+
+- **Issues** - [Report bugs or request features](https://github.com/iyotee/HeadForge/issues)
+- **Discussions** - [Join community discussions](https://github.com/iyotee/HeadForge/discussions)
+- **Wiki** - [Check our wiki](https://github.com/iyotee/HeadForge/wiki)
+- **Email** - [Contact us directly](mailto:support@headforge.dev)
+
+## 🔗 Links
+
+- **Website** - [headforge.dev](https://headforge.dev)
+- **Chrome Web Store** - [Install for Chrome](https://chrome.google.com/webstore)
+- **Firefox Add-ons** - [Install for Firefox](https://addons.mozilla.org)
+- **Microsoft Edge** - [Install for Edge](https://microsoftedge.microsoft.com/addons)
+- **GitHub** - [View source code](https://github.com/iyotee/HeadForge)
 
 ---
 
-**Made with ❤️ by Satoshiba**
+<div align="center">
 
-[Website](https://satoshiba.dev) • [GitHub](https://github.com/satoshiba) • [Twitter](https://twitter.com/satoshiba)
+**Made with ❤️ for developers**
+
+[⭐ Star us on GitHub](https://github.com/iyotee/HeadForge) | [🐛 Report Issues](https://github.com/iyotee/HeadForge/issues) | [💬 Join Discussions](https://github.com/iyotee/HeadForge/discussions)
+
+</div>

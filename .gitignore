@@ -96,3 +96,7 @@ jspm_packages/
 # Temporary files
 tmp/
 temp/
+
+# Development files
+prompt.md
+project-structure.txt
