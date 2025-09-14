@@ -5,12 +5,14 @@
   "description": "Generate professional code headers for multiple programming languages",
   "author": "Satoshiba",
   "homepage_url": "https://github.com/satoshiba/headforge",
+  
   "icons": {
     "16": "src/assets/icons/icon-16.png",
     "32": "src/assets/icons/icon-32.png",
     "48": "src/assets/icons/icon-48.png",
     "128": "src/assets/icons/icon-128.png"
   },
+  
   "action": {
     "default_popup": "src/popup/popup.html",
     "default_title": "HeadForge - Code Header Generator",
@@ -21,43 +23,40 @@
       "128": "src/assets/icons/icon-128.png"
     }
   },
+  
   "options_page": "src/options/options.html",
+  
   "background": {
     "service_worker": "src/background/background.ts"
   },
+  
   "content_scripts": [
     {
-      "matches": [
-        "<all_urls>"
-      ],
-      "js": [
-        "src/content/content-script.ts"
-      ],
-      "css": [
-        "src/content/content-script.css"
-      ],
+      "matches": ["<all_urls>"],
+      "js": ["src/content/content-script.ts"],
+      "css": ["src/content/content-script.css"],
       "run_at": "document_end"
     }
   ],
+  
   "permissions": [
     "storage",
     "activeTab",
     "clipboardWrite",
     "contextMenus"
   ],
+  
   "host_permissions": [
     "<all_urls>"
   ],
+  
   "web_accessible_resources": [
     {
-      "resources": [
-        "src/assets/*"
-      ],
-      "matches": [
-        "<all_urls>"
-      ]
+      "resources": ["src/assets/*"],
+      "matches": ["<all_urls>"]
     }
   ],
+  
   "content_security_policy": {
     "extension_pages": "script-src 'self'; object-src 'self'"
   }

@@ -12,7 +12,7 @@ class HeadForgeBuilder {
 
   async build() {
     console.log("🚀 Starting HeadForge build process...");
-    console.log("=" * 50);
+    console.log("=".repeat(50));
 
     try {
       // Clean previous builds

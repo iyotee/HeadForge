@@ -292,16 +292,21 @@ function generateBuildInfo() {
 function countFiles(dir) {
   let count = 0;
 
-  if (!fs.existsSync(dir)) return count;
+  if (!fs.existsSync(dir)) return 0;
 
-  const entries = fs.readdirSync(dir, { withFileTypes: true });
+  try {
+    const entries = fs.readdirSync(dir, { withFileTypes: true });
 
-  for (const entry of entries) {
-    if (entry.isDirectory()) {
-      count += countFiles(path.join(dir, entry.name));
-    } else {
-      count++;
+    for (const entry of entries) {
+      if (entry.isDirectory()) {
+        count += countFiles(path.join(dir, entry.name));
+      } else {
+        count++;
+      }
     }
+  } catch (error) {
+    console.warn(`Warning: Could not count files in ${dir}:`, error.message);
+    return 0;
   }
 
   return count;
