@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "HeadForge",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Generate professional code headers for 25+ programming languages including JavaScript, Python, Java, C++, and more.",
   "short_name": "HeadForge",
   
