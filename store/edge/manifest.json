@@ -1,63 +1,66 @@
 {
   "manifest_version": 3,
   "name": "HeadForge",
-  "version": "1.0.0",
-  "description": "Generate professional code headers for multiple programming languages",
-  "author": "Satoshiba",
-  "homepage_url": "https://github.com/satoshiba/headforge",
-  
+  "version": "1.2.3",
+  "description": "Generate professional code headers for 25+ programming languages including JavaScript, Python, Java, C++, and more.",
+  "short_name": "HeadForge",
   "icons": {
-    "16": "src/assets/icons/icon-16.png",
-    "32": "src/assets/icons/icon-32.png",
-    "48": "src/assets/icons/icon-48.png",
-    "128": "src/assets/icons/icon-128.png"
+    "16": "assets/icons/icon-16.png",
+    "32": "assets/icons/icon-32.png",
+    "48": "assets/icons/icon-48.png",
+    "128": "assets/icons/icon-128.png"
   },
-  
   "action": {
-    "default_popup": "src/popup/popup.html",
+    "default_popup": "popup/popup.html",
     "default_title": "HeadForge - Code Header Generator",
     "default_icon": {
-      "16": "src/assets/icons/icon-16.png",
-      "32": "src/assets/icons/icon-32.png",
-      "48": "src/assets/icons/icon-48.png",
-      "128": "src/assets/icons/icon-128.png"
+      "16": "assets/icons/icon-16.png",
+      "32": "assets/icons/icon-32.png",
+      "48": "assets/icons/icon-48.png",
+      "128": "assets/icons/icon-128.png"
     }
   },
-  
-  "options_page": "src/options/options.html",
-  
+  "options_page": "options/options.html",
   "background": {
-    "service_worker": "src/background/background.ts"
+    "service_worker": "background/background.js"
   },
-  
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
-      "js": ["src/content/content-script.ts"],
-      "css": ["src/content/content-script.css"],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "content/content-script.js"
+      ],
+      "css": [
+        "content/content-script.css"
+      ],
       "run_at": "document_end"
     }
   ],
-  
   "permissions": [
     "storage",
     "activeTab",
-    "clipboardWrite",
-    "contextMenus"
+    "clipboardWrite"
   ],
-  
   "host_permissions": [
-    "<all_urls>"
+    "http://*/*",
+    "https://*/*"
   ],
-  
   "web_accessible_resources": [
     {
-      "resources": ["src/assets/*"],
-      "matches": ["<all_urls>"]
+      "resources": [
+        "assets/*"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ]
     }
   ],
-  
   "content_security_policy": {
     "extension_pages": "script-src 'self'; object-src 'self'"
-  }
+  },
+  "minimum_edge_version": "88.0.0.0"
 }

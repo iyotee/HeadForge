@@ -1,0 +1,19 @@
+HeadForge is a powerful browser extension that helps developers create professional, standardized code headers for their projects.
+
+Features:
+• Support for 20+ programming languages
+• Customizable templates (simple and complete)
+• Auto-fill with project information
+• Copy to clipboard or download as file
+• Dark/Light theme support
+• Export in multiple formats
+
+Perfect for:
+• Software developers
+• Code documentation
+• Project standardization
+• Team collaboration
+
+Languages supported: JavaScript, TypeScript, Python, Java, C++, C#, Go, Rust, PHP, Ruby, HTML, CSS, and more.
+
+Open source and free to use!
