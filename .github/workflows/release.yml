@@ -64,13 +64,14 @@ jobs:
         cp store/headforge-firefox.zip release-packages/
         cp store/headforge-edge.zip release-packages/
         
-    - name: Create .crx files for direct installation
+    - name: Create direct installation files
       run: |
-        # Create .crx files (just rename .zip to .crx for Chrome/Edge)
-        cp store/headforge-chrome.zip release-packages/headforge-chrome.crx
-        cp store/headforge-edge.zip release-packages/headforge-edge.crx
-        # Create .xpi file for Firefox (just rename .zip to .xpi)
-        cp store/headforge-firefox.zip release-packages/headforge-firefox.xpi
+        # For direct installation, we'll use ZIP files with proper names
+        # Chrome/Edge can install ZIP files directly in developer mode
+        cp store/headforge-chrome.zip release-packages/headforge-chrome-direct-install.zip
+        cp store/headforge-edge.zip release-packages/headforge-edge-direct-install.zip
+        # Firefox can install ZIP files directly
+        cp store/headforge-firefox.zip release-packages/headforge-firefox-direct-install.zip
         
     - name: Generate release notes
       id: release-notes
@@ -95,9 +96,9 @@ jobs:
         ### 📦 Downloads
         
         **For Direct Installation (Recommended for Users):**
-        - **Chrome**: Download `headforge-chrome.crx` and drag to chrome://extensions/
-        - **Edge**: Download `headforge-edge.crx` and drag to edge://extensions/
-        - **Firefox**: Download `headforge-firefox.xpi` and drag to about:addons
+        - **Chrome**: Download `headforge-chrome-direct-install.zip`, extract, and load in chrome://extensions/ (Developer mode)
+        - **Edge**: Download `headforge-edge-direct-install.zip`, extract, and load in edge://extensions/ (Developer mode)
+        - **Firefox**: Download `headforge-firefox-direct-install.zip`, extract, and load in about:addons (Install Add-on From File)
         
         **For Store Submission (Developers/Partners):**
         - **Chrome Web Store**: Use `headforge-chrome.zip`
@@ -147,9 +148,9 @@ jobs:
           release-packages/headforge-chrome.zip
           release-packages/headforge-firefox.zip
           release-packages/headforge-edge.zip
-          release-packages/headforge-chrome.crx
-          release-packages/headforge-firefox.xpi
-          release-packages/headforge-edge.crx
+          release-packages/headforge-chrome-direct-install.zip
+          release-packages/headforge-firefox-direct-install.zip
+          release-packages/headforge-edge-direct-install.zip
         draft: false
         prerelease: ${{ github.event.inputs.prerelease == 'true' }}
         generate_release_notes: true
