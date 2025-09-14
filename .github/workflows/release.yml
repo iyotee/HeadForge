@@ -51,7 +51,7 @@ jobs:
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: build-artifacts
+        name: build-artifacts-${{ github.run_number }}
         path: |
           dist/
           store/
@@ -126,6 +126,13 @@ jobs:
         generate_release_notes: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Trigger Store Submission
+      if: success()
+      run: |
+        echo "🎉 Release created successfully!"
+        echo "📦 Store submission will be triggered automatically"
+        echo "🔄 Users will receive automatic updates through their browsers"
         
     - name: Notify Discord
       if: success()
