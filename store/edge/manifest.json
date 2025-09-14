@@ -1,15 +1,17 @@
 {
   "manifest_version": 3,
   "name": "HeadForge",
-  "version": "1.2.3",
+  "version": "1.2.12",
   "description": "Generate professional code headers for 25+ programming languages including JavaScript, Python, Java, C++, and more.",
   "short_name": "HeadForge",
+  
   "icons": {
     "16": "assets/icons/icon-16.png",
     "32": "assets/icons/icon-32.png",
     "48": "assets/icons/icon-48.png",
     "128": "assets/icons/icon-128.png"
   },
+  
   "action": {
     "default_popup": "popup/popup.html",
     "default_title": "HeadForge - Code Header Generator",
@@ -20,47 +22,40 @@
       "128": "assets/icons/icon-128.png"
     }
   },
+  
   "options_page": "options/options.html",
+  
   "background": {
     "service_worker": "background/background.js"
   },
+  
   "content_scripts": [
     {
-      "matches": [
-        "http://*/*",
-        "https://*/*"
-      ],
-      "js": [
-        "content/content-script.js"
-      ],
-      "css": [
-        "content/content-script.css"
-      ],
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["content/content.js"],
       "run_at": "document_end"
     }
   ],
+  
   "permissions": [
     "storage",
     "activeTab",
     "clipboardWrite"
   ],
+  
   "host_permissions": [
     "http://*/*",
     "https://*/*"
   ],
+  
   "web_accessible_resources": [
     {
-      "resources": [
-        "assets/*"
-      ],
-      "matches": [
-        "http://*/*",
-        "https://*/*"
-      ]
+      "resources": ["assets/*"],
+      "matches": ["http://*/*", "https://*/*"]
     }
   ],
+  
   "content_security_policy": {
     "extension_pages": "script-src 'self'; object-src 'self'"
-  },
-  "minimum_edge_version": "88.0.0.0"
+  }
 }
