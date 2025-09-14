@@ -19,6 +19,10 @@ jobs:
   build-and-release:
     runs-on: ubuntu-latest
     
+    permissions:
+      contents: write
+      packages: write
+    
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -62,7 +66,11 @@ jobs:
         
     - name: Create .crx files for direct installation
       run: |
-        node scripts/create-crx-files.js
+        # Create .crx files (just rename .zip to .crx for Chrome/Edge)
+        cp store/headforge-chrome.zip release-packages/headforge-chrome.crx
+        cp store/headforge-edge.zip release-packages/headforge-edge.crx
+        # Create .xpi file for Firefox (just rename .zip to .xpi)
+        cp store/headforge-firefox.zip release-packages/headforge-firefox.xpi
         
     - name: Generate release notes
       id: release-notes
