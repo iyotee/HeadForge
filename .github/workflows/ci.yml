@@ -61,5 +61,5 @@ jobs:
     - name: Upload store packages
       uses: actions/upload-artifact@v4
       with:
-        name: store-packages
+        name: ci-store-packages-${{ github.run_number }}
         path: store/*.zip

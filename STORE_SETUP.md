@@ -55,10 +55,12 @@ Add these secrets to your GitHub repository settings:
 1. Go to [Partner Center](https://partner.microsoft.com/dashboard)
 2. Create an app registration
 3. Add these secrets to GitHub:
-   - `EDGE_PRODUCT_ID`: Your product ID
+   - `EDGE_PRODUCT_ID`: `87f97987-2b9a-4472-965c-de487524a27d`
    - `EDGE_CLIENT_ID`: App registration client ID
    - `EDGE_CLIENT_SECRET`: App registration client secret
    - `EDGE_ACCESS_TOKEN_URL`: OAuth token URL
+   - `EDGE_STORE_ID`: `0RDCKGPPMFFD`
+   - `EDGE_CRX_ID`: `hhokheegikjbhfjianlhcakjeegadage`
 
 ## 🚀 How It Works
 

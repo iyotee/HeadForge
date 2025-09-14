@@ -52,7 +52,7 @@ jobs:
     - name: Upload packages
       uses: actions/upload-artifact@v4
       with:
-        name: store-packages
+        name: store-submission-packages-${{ github.run_number }}
         path: |
           store/headforge-chrome.zip
           store/headforge-firefox.zip
@@ -68,7 +68,7 @@ jobs:
     - name: Download packages
       uses: actions/download-artifact@v4
       with:
-        name: store-packages
+        name: store-submission-packages-${{ github.run_number }}
         path: store/
         
     - name: Submit to Chrome Web Store
@@ -94,7 +94,7 @@ jobs:
     - name: Download packages
       uses: actions/download-artifact@v4
       with:
-        name: store-packages
+        name: store-submission-packages-${{ github.run_number }}
         path: store/
         
     - name: Submit to Firefox Add-ons
@@ -118,7 +118,7 @@ jobs:
     - name: Download packages
       uses: actions/download-artifact@v4
       with:
-        name: store-packages
+        name: store-submission-packages-${{ github.run_number }}
         path: store/
         
     - name: Submit to Microsoft Edge Add-ons

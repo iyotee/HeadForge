@@ -59,7 +59,8 @@
     "prepare-github": "node scripts/prepare-github.js",
     "release": "npm run build && node scripts/build-stores.js",
     "create-release": "node scripts/create-release.js",
-    "validate-store": "node scripts/validate-store-requirements.js"
+    "validate-store": "node scripts/validate-store-requirements.js",
+    "setup-secrets": "node scripts/setup-github-secrets.js"
   },
   "devDependencies": {
     "@playwright/test": "^1.40.0",
