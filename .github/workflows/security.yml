@@ -1,0 +1,281 @@
+name: Security Audit
+
+on:
+  schedule:
+    - cron: '0 2 * * 1' # Weekly on Monday at 2 AM
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  security-scan:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Run npm audit
+      run: npm audit --audit-level=moderate
+      
+    - name: Run Snyk security scan
+      uses: snyk/actions/node@master
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      with:
+        args: --severity-threshold=high
+      continue-on-error: true
+      
+    - name: Run CodeQL Analysis
+      uses: github/codeql-action/init@v2
+      with:
+        languages: javascript
+        
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v2
+      
+    - name: Run OWASP ZAP Baseline Scan
+      uses: zaproxy/action-baseline@v0.7.0
+      with:
+        target: 'http://localhost:3000'
+        rules_file_name: '.zap/rules.tsv'
+        cmd_options: '-a'
+        
+  dependency-check:
+    name: Dependency Security Check
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Run npm audit fix
+      run: npm audit fix --force
+      continue-on-error: true
+      
+    - name: Check for known vulnerabilities
+      run: |
+        npx audit-ci --config audit-ci.json
+      continue-on-error: true
+      
+    - name: Generate security report
+      run: |
+        echo "# Security Report" > security-report.md
+        echo "Generated on: $(date)" >> security-report.md
+        echo "" >> security-report.md
+        echo "## Dependencies" >> security-report.md
+        npm audit --json >> security-report.md
+        echo "" >> security-report.md
+        echo "## Recommendations" >> security-report.md
+        echo "- Update vulnerable dependencies" >> security-report.md
+        echo "- Review and test updates before deployment" >> security-report.md
+        
+    - name: Upload security report
+      uses: actions/upload-artifact@v3
+      with:
+        name: security-report
+        path: security-report.md
+        retention-days: 30
+        
+  manifest-security:
+    name: Manifest Security Check
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Build extension
+      run: npm run build
+      
+    - name: Validate manifest permissions
+      run: |
+        node scripts/validate-manifest.js
+        
+    - name: Check for dangerous permissions
+      run: |
+        echo "Checking for dangerous permissions..."
+        if grep -q "tabs" dist/manifest.json; then
+          echo "⚠️  'tabs' permission detected - ensure it's necessary"
+        fi
+        if grep -q "activeTab" dist/manifest.json; then
+          echo "✅ 'activeTab' permission detected - good practice"
+        fi
+        if grep -q "storage" dist/manifest.json; then
+          echo "✅ 'storage' permission detected - required for preferences"
+        fi
+        
+  content-security-policy:
+    name: Content Security Policy Check
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Build extension
+      run: npm run build
+      
+    - name: Validate CSP
+      run: |
+        echo "Validating Content Security Policy..."
+        if grep -q "content_security_policy" dist/manifest.json; then
+          echo "✅ CSP defined in manifest"
+        else
+          echo "❌ No CSP defined - this is a security risk"
+          exit 1
+        fi
+        
+    - name: Check for inline scripts
+      run: |
+        echo "Checking for inline scripts..."
+        if grep -r "javascript:" dist/; then
+          echo "❌ Inline JavaScript detected - security risk"
+          exit 1
+        else
+          echo "✅ No inline JavaScript found"
+        fi
+        
+    - name: Check for eval usage
+      run: |
+        echo "Checking for eval usage..."
+        if grep -r "eval(" dist/; then
+          echo "❌ eval() usage detected - security risk"
+          exit 1
+        else
+          echo "✅ No eval() usage found"
+        fi
+        
+  privacy-audit:
+    name: Privacy Audit
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Build extension
+      run: npm run build
+      
+    - name: Check for data collection
+      run: |
+        echo "Checking for data collection..."
+        if grep -r "analytics\|tracking\|telemetry" dist/; then
+          echo "⚠️  Analytics/tracking code detected - ensure privacy compliance"
+        else
+          echo "✅ No analytics/tracking code found"
+        fi
+        
+    - name: Check for external requests
+      run: |
+        echo "Checking for external requests..."
+        if grep -r "fetch\|XMLHttpRequest\|axios" dist/; then
+          echo "⚠️  External requests detected - ensure they're necessary and secure"
+        else
+          echo "✅ No external requests found"
+        fi
+        
+    - name: Validate privacy policy
+      run: |
+        if [ -f "store/chrome/privacy-policy.md" ]; then
+          echo "✅ Privacy policy found"
+        else
+          echo "❌ Privacy policy missing - required for store submission"
+          exit 1
+        fi
+        
+  security-summary:
+    name: Security Summary
+    runs-on: ubuntu-latest
+    needs: [security-scan, dependency-check, manifest-security, content-security-policy, privacy-audit]
+    if: always()
+    
+    steps:
+    - name: Generate security summary
+      run: |
+        echo "# Security Audit Summary" > security-summary.md
+        echo "Generated on: $(date)" >> security-summary.md
+        echo "" >> security-summary.md
+        echo "## Results" >> security-summary.md
+        echo "- Security Scan: ${{ needs.security-scan.result }}" >> security-summary.md
+        echo "- Dependency Check: ${{ needs.dependency-check.result }}" >> security-summary.md
+        echo "- Manifest Security: ${{ needs.manifest-security.result }}" >> security-summary.md
+        echo "- CSP Check: ${{ needs.content-security-policy.result }}" >> security-summary.md
+        echo "- Privacy Audit: ${{ needs.privacy-audit.result }}" >> security-summary.md
+        echo "" >> security-summary.md
+        echo "## Recommendations" >> security-summary.md
+        echo "1. Review all security findings" >> security-summary.md
+        echo "2. Update vulnerable dependencies" >> security-summary.md
+        echo "3. Ensure minimal permissions" >> security-summary.md
+        echo "4. Validate CSP implementation" >> security-summary.md
+        echo "5. Review privacy implications" >> security-summary.md
+        
+    - name: Upload security summary
+      uses: actions/upload-artifact@v3
+      with:
+        name: security-summary
+        path: security-summary.md
+        retention-days: 30
+        
+    - name: Comment PR with security results
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const fs = require('fs');
+          const summary = fs.readFileSync('security-summary.md', 'utf8');
+          
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: `## 🔒 Security Audit Results\n\n\`\`\`\n${summary}\n\`\`\``
+          });

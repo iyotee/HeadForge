@@ -1,0 +1,62 @@
+graph TB
+    subgraph "HeadForge Extension"
+        subgraph "UI Components"
+            A[Popup Interface]
+            B[Options Page]
+            C[Settings Pages]
+        end
+        
+        subgraph "Core Services"
+            D[Template Engine]
+            E[Validation Service]
+            F[Storage Service]
+            G[Theme Service]
+        end
+        
+        subgraph "Utilities"
+            H[Date Utils]
+            I[Clipboard Utils]
+            J[File Utils]
+            K[Language Utils]
+        end
+        
+        subgraph "Data Models"
+            L[Header Data]
+            M[Language Config]
+            N[User Settings]
+            O[Theme Config]
+        end
+    end
+    
+    %% Component relationships
+    A --> D
+    A --> E
+    A --> F
+    A --> G
+    
+    B --> F
+    B --> G
+    C --> F
+    
+    D --> K
+    D --> L
+    D --> M
+    
+    E --> L
+    F --> N
+    G --> O
+    
+    A --> H
+    A --> I
+    A --> J
+    
+    %% Styling
+    classDef ui fill:#e8f5e8,stroke:#2e7d32,stroke-width:2px
+    classDef service fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    classDef util fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
+    classDef data fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    
+    class A,B,C ui
+    class D,E,F,G service
+    class H,I,J,K util
+    class L,M,N,O data

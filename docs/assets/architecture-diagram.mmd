@@ -1,0 +1,67 @@
+graph TB
+    subgraph "HeadForge Extension"
+        subgraph "User Interface"
+            A[Popup Interface<br/>- Form Input<br/>- Real-time Preview<br/>- Export Options]
+            B[Options Page<br/>- Settings<br/>- Preferences<br/>- Theme Config]
+        end
+        
+        subgraph "Core Logic"
+            C[Background Script<br/>- Service Worker<br/>- Message Handler<br/>- Storage Manager]
+            D[Content Scripts<br/>- Editor Integration<br/>- DOM Manipulation<br/>- Code Insertion]
+        end
+        
+        subgraph "Utilities"
+            E[Template Engine<br/>- Header Generation<br/>- Language Support<br/>- Formatting]
+            F[Validation<br/>- Input Validation<br/>- Data Sanitization<br/>- Error Handling]
+            G[Storage Utils<br/>- Local Storage<br/>- Settings Management<br/>- Preferences]
+        end
+        
+        subgraph "Data Layer"
+            H[Language Configs<br/>- 25+ Languages<br/>- Comment Syntax<br/>- Templates]
+            I[User Settings<br/>- Preferences<br/>- Theme<br/>- Defaults]
+            J[Header Data<br/>- Form Input<br/>- Generated Content<br/>- Export Options]
+        end
+    end
+    
+    subgraph "External Systems"
+        K[Browser APIs<br/>- Storage API<br/>- Clipboard API<br/>- File API]
+        L[Web Pages<br/>- Code Editors<br/>- Development Tools<br/>- IDEs]
+    end
+    
+    %% User interactions
+    A --> E
+    A --> F
+    A --> G
+    B --> G
+    B --> I
+    
+    %% Core logic connections
+    C --> E
+    C --> F
+    C --> G
+    D --> E
+    D --> L
+    
+    %% Data flow
+    E --> H
+    F --> J
+    G --> I
+    G --> J
+    
+    %% External connections
+    C --> K
+    D --> K
+    A --> K
+    
+    %% Styling
+    classDef ui fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    classDef core fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+    classDef utils fill:#e8f5e8,stroke:#1b5e20,stroke-width:2px
+    classDef data fill:#fff3e0,stroke:#e65100,stroke-width:2px
+    classDef external fill:#fce4ec,stroke:#880e4f,stroke-width:2px
+    
+    class A,B ui
+    class C,D core
+    class E,F,G utils
+    class H,I,J data
+    class K,L external

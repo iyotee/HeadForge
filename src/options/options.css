@@ -1,0 +1,155 @@
+/* HeadForge Options Specific Styles */
+
+/* Options page specific overrides and customizations */
+
+/* Options header with logo */
+.options-header-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.options-logo {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.options-logo:hover {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.options-header-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+/* Options navigation */
+.options-nav {
+  background-color: var(--bg-color-secondary);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-xl);
+}
+
+.options-nav-list {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: var(--spacing-sm);
+}
+
+.options-nav-item {
+  flex: 1;
+}
+
+.options-nav-link {
+  display: block;
+  padding: var(--spacing-md);
+  text-align: center;
+  text-decoration: none;
+  color: var(--text-color-secondary);
+  border-radius: var(--border-radius-md);
+  transition: all var(--transition-speed) ease;
+  font-weight: 500;
+}
+
+.options-nav-link:hover {
+  color: var(--text-color);
+  background-color: var(--bg-color-tertiary);
+}
+
+.options-nav-link.active {
+  color: var(--primary-color);
+  background-color: var(--primary-color-light);
+}
+
+/* Options sections */
+.options-section {
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-xl);
+  margin-bottom: var(--spacing-xl);
+}
+
+.options-section-header {
+  margin-bottom: var(--spacing-xl);
+}
+
+.options-section-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin: 0 0 var(--spacing-sm) 0;
+}
+
+.options-section-description {
+  color: var(--text-color-secondary);
+  margin: 0;
+}
+
+/* Options grid layout */
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.options-card {
+  background: var(--bg-color-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-lg);
+  transition: all 0.3s ease;
+}
+
+.options-card:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.options-card-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin: 0 0 var(--spacing-sm) 0;
+}
+
+.options-card-description {
+  color: var(--text-color-secondary);
+  font-size: 0.875rem;
+  margin: 0 0 var(--spacing-md) 0;
+}
+
+.options-card-actions {
+  display: flex;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .options-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .options-nav-list {
+    flex-direction: column;
+  }
+  
+  .options-section {
+    padding: var(--spacing-lg);
+  }
+}

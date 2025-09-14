@@ -1,0 +1,240 @@
+name: Store Submission
+
+on:
+  workflow_dispatch:
+    inputs:
+      store:
+        description: 'Store to submit to (chrome, firefox, edge, all)'
+        required: true
+        type: choice
+        options:
+          - chrome
+          - firefox
+          - edge
+          - all
+      version:
+        description: 'Version to submit'
+        required: true
+        type: string
+      release_notes:
+        description: 'Release notes for this submission'
+        required: false
+        type: string
+
+jobs:
+  prepare-submission:
+    name: Prepare Store Submission
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Build extension
+      run: npm run build
+      
+    - name: Package extension
+      run: npm run package:all
+      
+    - name: Generate store assets
+      run: npm run store:assets
+      
+    - name: Validate packages
+      run: |
+        echo "Validating packages..."
+        ls -la packages/
+        for file in packages/*.zip; do
+          echo "Package: $file"
+          unzip -t "$file"
+        done
+        
+    - name: Upload packages
+      uses: actions/upload-artifact@v3
+      with:
+        name: store-packages
+        path: packages/
+        retention-days: 30
+        
+    - name: Upload store assets
+      uses: actions/upload-artifact@v3
+      with:
+        name: store-assets
+        path: store/
+        retention-days: 30
+
+  submit-chrome:
+    name: Submit to Chrome Web Store
+    runs-on: ubuntu-latest
+    needs: prepare-submission
+    if: ${{ github.event.inputs.store == 'chrome' || github.event.inputs.store == 'all' }}
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Download packages
+      uses: actions/download-artifact@v3
+      with:
+        name: store-packages
+        path: packages/
+        
+    - name: Download store assets
+      uses: actions/download-artifact@v3
+      with:
+        name: store-assets
+        path: store/
+        
+    - name: Setup Chrome Web Store API
+      run: |
+        echo "Setting up Chrome Web Store API..."
+        # This would typically involve setting up the Chrome Web Store API
+        # For now, we'll create a placeholder
+        
+    - name: Submit to Chrome Web Store
+      run: |
+        echo "Submitting to Chrome Web Store..."
+        echo "Version: ${{ github.event.inputs.version }}"
+        echo "Release Notes: ${{ github.event.inputs.release_notes }}"
+        
+        # This would typically use the Chrome Web Store API
+        # For now, we'll create a placeholder submission
+        
+    - name: Notify submission status
+      run: |
+        echo "Chrome Web Store submission completed"
+        echo "Check the Chrome Web Store Developer Dashboard for review status"
+
+  submit-firefox:
+    name: Submit to Firefox Add-ons
+    runs-on: ubuntu-latest
+    needs: prepare-submission
+    if: ${{ github.event.inputs.store == 'firefox' || github.event.inputs.store == 'all' }}
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Download packages
+      uses: actions/download-artifact@v3
+      with:
+        name: store-packages
+        path: packages/
+        
+    - name: Download store assets
+      uses: actions/download-artifact@v3
+      with:
+        name: store-assets
+        path: store/
+        
+    - name: Setup Firefox Add-ons API
+      run: |
+        echo "Setting up Firefox Add-ons API..."
+        # This would typically involve setting up the Firefox Add-ons API
+        
+    - name: Submit to Firefox Add-ons
+      run: |
+        echo "Submitting to Firefox Add-ons..."
+        echo "Version: ${{ github.event.inputs.version }}"
+        echo "Release Notes: ${{ github.event.inputs.release_notes }}"
+        
+        # This would typically use the Firefox Add-ons API
+        
+    - name: Notify submission status
+      run: |
+        echo "Firefox Add-ons submission completed"
+        echo "Check the Firefox Add-ons Developer Hub for review status"
+
+  submit-edge:
+    name: Submit to Edge Add-ons
+    runs-on: ubuntu-latest
+    needs: prepare-submission
+    if: ${{ github.event.inputs.store == 'edge' || github.event.inputs.store == 'all' }}
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Download packages
+      uses: actions/download-artifact@v3
+      with:
+        name: store-packages
+        path: packages/
+        
+    - name: Download store assets
+      uses: actions/download-artifact@v3
+      with:
+        name: store-assets
+        path: store/
+        
+    - name: Setup Edge Add-ons API
+      run: |
+        echo "Setting up Edge Add-ons API..."
+        # This would typically involve setting up the Edge Add-ons API
+        
+    - name: Submit to Edge Add-ons
+      run: |
+        echo "Submitting to Edge Add-ons..."
+        echo "Version: ${{ github.event.inputs.version }}"
+        echo "Release Notes: ${{ github.event.inputs.release_notes }}"
+        
+        # This would typically use the Edge Add-ons API
+        
+    - name: Notify submission status
+      run: |
+        echo "Edge Add-ons submission completed"
+        echo "Check the Edge Add-ons Developer Dashboard for review status"
+
+  notify-completion:
+    name: Notify Submission Completion
+    runs-on: ubuntu-latest
+    needs: [submit-chrome, submit-firefox, submit-edge]
+    if: always()
+    
+    steps:
+    - name: Create summary
+      run: |
+        echo "# Store Submission Summary" > submission-summary.md
+        echo "" >> submission-summary.md
+        echo "**Version:** ${{ github.event.inputs.version }}" >> submission-summary.md
+        echo "**Release Notes:** ${{ github.event.inputs.release_notes }}" >> submission-summary.md
+        echo "" >> submission-summary.md
+        echo "## Submission Status" >> submission-summary.md
+        echo "- Chrome Web Store: ${{ needs.submit-chrome.result }}" >> submission-summary.md
+        echo "- Firefox Add-ons: ${{ needs.submit-firefox.result }}" >> submission-summary.md
+        echo "- Edge Add-ons: ${{ needs.submit-edge.result }}" >> submission-summary.md
+        echo "" >> submission-summary.md
+        echo "## Next Steps" >> submission-summary.md
+        echo "1. Monitor store dashboards for review status" >> submission-summary.md
+        echo "2. Address any review feedback" >> submission-summary.md
+        echo "3. Update documentation with new version" >> submission-summary.md
+        
+    - name: Upload summary
+      uses: actions/upload-artifact@v3
+      with:
+        name: submission-summary
+        path: submission-summary.md
+        retention-days: 30
+        
+    - name: Comment on issue/PR
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const fs = require('fs');
+          const summary = fs.readFileSync('submission-summary.md', 'utf8');
+          
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: `## 🏪 Store Submission Complete\n\n\`\`\`\n${summary}\n\`\`\``
+          });

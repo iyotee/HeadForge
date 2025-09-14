@@ -1,0 +1,26 @@
+/* HeadForge Main Styles - Clean & Organized */
+
+/* Import all necessary styles in logical order */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+
+/* 1. Variables and CSS Custom Properties */
+@import './variables.css';
+
+/* 2. Global styles and resets */
+@import './globals.css';
+
+/* 3. Theme definitions */
+@import './themes.css';
+
+/* 4. Component styles */
+@import './components.css';
+
+/* 5. Layout styles */
+@import './layout.css';
+
+/* 6. Animation styles */
+@import './animations.css';
+
+/* 7. Utility classes */
+@import './utilities.css';

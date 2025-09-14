@@ -1,0 +1,65 @@
+graph TD
+    A[User Opens Extension] --> B{First Time?}
+    B -->|Yes| C[Show Welcome Message]
+    B -->|No| D[Load Previous Settings]
+    
+    C --> E[User Fills Form]
+    D --> E
+    
+    E --> F[Select Programming Language]
+    F --> G[Fill Project Details]
+    G --> H[Configure Additional Settings]
+    H --> I[Real-time Preview Updates]
+    
+    I --> J{User Satisfied?}
+    J -->|No| K[Modify Form Fields]
+    K --> I
+    J -->|Yes| L[Generate Header]
+    
+    L --> M{Export Option?}
+    M -->|Copy| N[Copy to Clipboard]
+    M -->|Download| O[Download File]
+    M -->|Insert| P[Insert into Editor]
+    
+    N --> Q[Show Success Message]
+    O --> Q
+    P --> Q
+    
+    Q --> R{Continue?}
+    R -->|Yes| S[Clear Form/New Header]
+    R -->|No| T[Close Extension]
+    
+    S --> E
+    
+    %% Error handling
+    E --> U{Validation Error?}
+    U -->|Yes| V[Show Error Message]
+    V --> E
+    U -->|No| F
+    
+    %% Settings flow
+    E --> W[User Opens Settings]
+    W --> X[Configure Preferences]
+    X --> Y[Save Settings]
+    Y --> Z[Return to Main Interface]
+    Z --> E
+    
+    %% Theme switching
+    E --> AA[User Toggles Theme]
+    AA --> BB[Update UI Theme]
+    BB --> E
+    
+    %% Styling
+    classDef start fill:#e8f5e8,stroke:#2e7d32,stroke-width:3px
+    classDef process fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    classDef decision fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
+    classDef action fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px
+    classDef end fill:#e0f2f1,stroke:#00695c,stroke-width:3px
+    
+    class A start
+    class E,F,G,H,I,L,N,O,P,X,Y,BB process
+    class B,J,M,R,U decision
+    class C,D,K,Q,S,W,Z action
+    class V error
+    class T end
