@@ -60,9 +60,9 @@ jobs:
     - name: Create store packages
       run: |
         mkdir -p release-packages
-        cp store/chrome/headforge-chrome.zip release-packages/
-        cp store/firefox/headforge-firefox.zip release-packages/
-        cp store/edge/headforge-edge.zip release-packages/
+        cp store/headforge-chrome.zip release-packages/
+        cp store/headforge-firefox.zip release-packages/
+        cp store/headforge-edge.zip release-packages/
         
     - name: Generate release notes
       id: release-notes
