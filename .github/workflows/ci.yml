@@ -11,9 +11,6 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
     
-    # Skip CI if this is a tag push
-    if: ${{ !startsWith(github.ref, 'refs/tags/') }}
-    
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
