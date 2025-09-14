@@ -1,0 +1,46 @@
+# HeadForge Code Owners
+# This file defines who is responsible for different parts of the codebase
+# For more information, see: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Global owners - responsible for the entire repository
+* @iyotee
+
+# Core application files
+/src/ @iyotee
+/src/background/ @iyotee
+/src/content/ @iyotee
+/src/popup/ @iyotee
+/src/options/ @iyotee
+/src/utils/ @iyotee
+/src/types/ @iyotee
+/src/styles/ @iyotee
+
+# Configuration files
+/config/ @iyotee
+/scripts/ @iyotee
+/tsconfig.json @iyotee
+/package.json @iyotee
+/package-lock.json @iyotee
+
+# Build and deployment
+/.github/ @iyotee
+/.github/workflows/ @iyotee
+/.github/CODEOWNERS @iyotee
+
+# Documentation
+/README.md @iyotee
+/CONTRIBUTING.md @iyotee
+/CODE_OF_CONDUCT.md @iyotee
+/CHANGELOG.md @iyotee
+/LICENSE @iyotee
+/docs/ @iyotee
+
+# Testing
+/tests/ @iyotee
+/jest.config.js @iyotee
+
+# Store packages (built extensions)
+/store/ @iyotee
+
+# Security and compliance
+/SECURITY.md @iyotee
