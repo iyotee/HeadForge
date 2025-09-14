@@ -1,30 +1,30 @@
 #!/usr/bin/env node
 
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
-console.log('🔍 Validating HeadForge for store requirements...\n');
+console.log("🔍 Validating HeadForge for store requirements...\n");
 
 // Read manifest
-const manifestPath = path.join(__dirname, '../src/manifest.json');
-const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+const manifestPath = path.join(__dirname, "../src/manifest.json");
+const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
 
 let errors = [];
 let warnings = [];
 
 // Manifest V3 Requirements
-console.log('📋 Checking Manifest V3 compliance...');
+console.log("📋 Checking Manifest V3 compliance...");
 
 // Check manifest version
 if (manifest.manifest_version !== 3) {
-  errors.push('❌ Manifest version must be 3');
+  errors.push("❌ Manifest version must be 3");
 } else {
-  console.log('✅ Manifest version is 3');
+  console.log("✅ Manifest version is 3");
 }
 
 // Check required fields
-const requiredFields = ['name', 'version', 'description'];
-requiredFields.forEach(field => {
+const requiredFields = ["name", "version", "description"];
+requiredFields.forEach((field) => {
   if (!manifest[field]) {
     errors.push(`❌ Missing required field: ${field}`);
   } else {
@@ -33,8 +33,8 @@ requiredFields.forEach(field => {
 });
 
 // Check deprecated fields
-const deprecatedFields = ['author', 'homepage_url'];
-deprecatedFields.forEach(field => {
+const deprecatedFields = ["author", "homepage_url"];
+deprecatedFields.forEach((field) => {
   if (manifest[field]) {
     warnings.push(`⚠️  Deprecated field found: ${field} (should be removed)`);
   }
@@ -42,10 +42,10 @@ deprecatedFields.forEach(field => {
 
 // Check icons
 if (!manifest.icons) {
-  errors.push('❌ Missing icons');
+  errors.push("❌ Missing icons");
 } else {
   const requiredSizes = [16, 32, 48, 128];
-  requiredSizes.forEach(size => {
+  requiredSizes.forEach((size) => {
     if (!manifest.icons[size]) {
       errors.push(`❌ Missing icon size: ${size}x${size}`);
     } else {
@@ -56,60 +56,66 @@ if (!manifest.icons) {
 
 // Check permissions
 if (manifest.permissions) {
-  const dangerousPermissions = ['tabs', 'bookmarks', 'history', 'downloads'];
-  manifest.permissions.forEach(permission => {
+  const dangerousPermissions = ["tabs", "bookmarks", "history", "downloads"];
+  manifest.permissions.forEach((permission) => {
     if (dangerousPermissions.includes(permission)) {
       warnings.push(`⚠️  Potentially dangerous permission: ${permission}`);
     }
   });
-  console.log(`✅ Permissions: ${manifest.permissions.join(', ')}`);
+  console.log(`✅ Permissions: ${manifest.permissions.join(", ")}`);
 }
 
 // Check host_permissions
 if (manifest.host_permissions) {
-  if (manifest.host_permissions.includes('<all_urls>')) {
-    warnings.push('⚠️  <all_urls> permission may be rejected by stores');
+  if (manifest.host_permissions.includes("<all_urls>")) {
+    warnings.push("⚠️  <all_urls> permission may be rejected by stores");
   }
-  console.log(`✅ Host permissions: ${manifest.host_permissions.join(', ')}`);
+  console.log(`✅ Host permissions: ${manifest.host_permissions.join(", ")}`);
 }
 
 // Check content scripts
 if (manifest.content_scripts) {
   manifest.content_scripts.forEach((script, index) => {
-    if (script.matches && script.matches.includes('<all_urls>')) {
-      warnings.push(`⚠️  Content script ${index} uses <all_urls> which may be rejected`);
+    if (script.matches && script.matches.includes("<all_urls>")) {
+      warnings.push(
+        `⚠️  Content script ${index} uses <all_urls> which may be rejected`
+      );
     }
   });
 }
 
 // Check description length
 if (manifest.description && manifest.description.length < 10) {
-  warnings.push('⚠️  Description is too short (should be at least 10 characters)');
+  warnings.push(
+    "⚠️  Description is too short (should be at least 10 characters)"
+  );
 }
 
 if (manifest.description && manifest.description.length > 132) {
-  warnings.push('⚠️  Description is too long (should be less than 132 characters)');
+  warnings.push(
+    "⚠️  Description is too long (should be less than 132 characters)"
+  );
 }
 
 // Check version format
 const versionRegex = /^\d+\.\d+\.\d+$/;
 if (!versionRegex.test(manifest.version)) {
-  errors.push('❌ Version must be in format X.Y.Z (e.g., 1.0.0)');
+  errors.push("❌ Version must be in format X.Y.Z (e.g., 1.0.0)");
 } else {
   console.log(`✅ Version format: ${manifest.version}`);
 }
 
 // Check file paths
-console.log('\n📁 Checking file paths...');
+console.log("\n📁 Checking file paths...");
 const checkFileExists = (filePath) => {
-  const fullPath = path.join(__dirname, '../src', filePath);
+  const fullPath = path.join(__dirname, "../src", filePath);
   return fs.existsSync(fullPath);
 };
 
 // Check background script
 if (manifest.background && manifest.background.service_worker) {
   // Check for TypeScript source file
-  const tsFile = manifest.background.service_worker.replace('.js', '.ts');
+  const tsFile = manifest.background.service_worker.replace(".js", ".ts");
   if (checkFileExists(tsFile)) {
     console.log(`✅ Background script source: ${tsFile}`);
   } else {
@@ -139,9 +145,9 @@ if (manifest.options_page) {
 if (manifest.content_scripts) {
   manifest.content_scripts.forEach((script, index) => {
     if (script.js) {
-      script.js.forEach(jsFile => {
+      script.js.forEach((jsFile) => {
         // Check for TypeScript source file
-        const tsFile = jsFile.replace('.js', '.ts');
+        const tsFile = jsFile.replace(".js", ".ts");
         if (checkFileExists(tsFile)) {
           console.log(`✅ Content script ${index} source: ${tsFile}`);
         } else {
@@ -153,28 +159,28 @@ if (manifest.content_scripts) {
 }
 
 // Summary
-console.log('\n📊 Validation Summary:');
-console.log('='.repeat(50));
+console.log("\n📊 Validation Summary:");
+console.log("=".repeat(50));
 
 if (errors.length === 0 && warnings.length === 0) {
-  console.log('🎉 All checks passed! Extension is ready for store submission.');
+  console.log("🎉 All checks passed! Extension is ready for store submission.");
   process.exit(0);
 } else {
   if (errors.length > 0) {
-    console.log('\n❌ ERRORS (must be fixed):');
-    errors.forEach(error => console.log(`  ${error}`));
+    console.log("\n❌ ERRORS (must be fixed):");
+    errors.forEach((error) => console.log(`  ${error}`));
   }
-  
+
   if (warnings.length > 0) {
-    console.log('\n⚠️  WARNINGS (should be reviewed):');
-    warnings.forEach(warning => console.log(`  ${warning}`));
+    console.log("\n⚠️  WARNINGS (should be reviewed):");
+    warnings.forEach((warning) => console.log(`  ${warning}`));
   }
-  
-  console.log('\n📋 Next steps:');
-  console.log('  1. Fix all errors before submitting to stores');
-  console.log('  2. Review warnings and address if necessary');
-  console.log('  3. Test extension thoroughly on target browsers');
-  console.log('  4. Follow store-specific submission guidelines');
-  
+
+  console.log("\n📋 Next steps:");
+  console.log("  1. Fix all errors before submitting to stores");
+  console.log("  2. Review warnings and address if necessary");
+  console.log("  3. Test extension thoroughly on target browsers");
+  console.log("  4. Follow store-specific submission guidelines");
+
   process.exit(errors.length > 0 ? 1 : 0);
 }
