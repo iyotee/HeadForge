@@ -124,13 +124,13 @@ jobs:
         5. Click "Load unpacked" and select the extracted folder
         
         ### 🔧 Development
-        - Source code: [GitHub Repository](https://github.com/satoshiba/headforge)
-        - Issues: [Report a bug](https://github.com/satoshiba/headforge/issues)
-        - Documentation: [Wiki](https://github.com/satoshiba/headforge/wiki)
+        - Source code: [GitHub Repository](https://github.com/iyotee/HeadForge)
+        - Issues: [Report a bug](https://github.com/iyotee/HeadForge/issues)
+        - Documentation: [Wiki](https://github.com/iyotee/HeadForge/wiki)
         
         ---
         
-        **Full Changelog**: https://github.com/satoshiba/headforge/compare/$TAG_NAME...HEAD
+        **Full Changelog**: https://github.com/iyotee/HeadForge/compare/$TAG_NAME...HEAD
         EOF
         
         # Output the release notes
@@ -178,8 +178,8 @@ jobs:
           • [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/headforge/)
           • [Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/headforge/your-extension-id)
           
-          🔗 **Repository:** https://github.com/satoshiba/headforge
-          📋 **Changelog:** https://github.com/satoshiba/headforge/releases/tag/${{ github.ref_name }}
+          🔗 **Repository:** https://github.com/iyotee/HeadForge
+          📋 **Changelog:** https://github.com/iyotee/HeadForge/releases/tag/${{ github.ref_name }}
           
     - name: Update Extension Stores
       if: success()
