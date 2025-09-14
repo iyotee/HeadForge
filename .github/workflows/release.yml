@@ -4,10 +4,24 @@ on:
   push:
     tags:
       - 'v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to release (e.g., v1.0.0)'
+        required: true
+        default: 'v1.0.0'
+      prerelease:
+        description: 'Mark as prerelease'
+        type: boolean
+        default: false
 
 jobs:
   build-and-release:
     runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        browser: [chrome, firefox, edge]
     
     steps:
     - name: Checkout code
@@ -22,21 +36,131 @@ jobs:
     - name: Install dependencies
       run: npm ci
       
+    - name: Run tests
+      run: npm test
+      
+    - name: Run linter
+      run: npm run lint
+      
     - name: Build extension
       run: npm run build
       
     - name: Build store packages
       run: node scripts/build-stores.js
       
-    - name: Create release
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-artifacts
+        path: |
+          dist/
+          store/
+        retention-days: 30
+        
+    - name: Create store packages
+      run: |
+        mkdir -p release-packages
+        cp store/chrome/headforge-chrome.zip release-packages/
+        cp store/firefox/headforge-firefox.zip release-packages/
+        cp store/edge/headforge-edge.zip release-packages/
+        
+    - name: Generate release notes
+      id: release-notes
+      run: |
+        # Get the tag name
+        TAG_NAME=${GITHUB_REF#refs/tags/}
+        
+        # Generate release notes
+        cat > release-notes.md << EOF
+        ## What's New in $TAG_NAME
+        
+        ### 🚀 Features
+        - Enhanced code header generation
+        - Improved template system
+        - Better cross-browser compatibility
+        
+        ### 🐛 Bug Fixes
+        - Fixed template formatting issues
+        - Resolved clipboard functionality
+        - Improved update checker
+        
+        ### 📦 Downloads
+        - **Chrome Web Store**: [Download](https://chrome.google.com/webstore/detail/headforge/your-extension-id)
+        - **Firefox Add-ons**: [Download](https://addons.mozilla.org/en-US/firefox/addon/headforge/)
+        - **Microsoft Edge**: [Download](https://microsoftedge.microsoft.com/addons/detail/headforge/your-extension-id)
+        
+        ### 📋 Installation Instructions
+        1. Download the appropriate package for your browser
+        2. Extract the ZIP file
+        3. Open your browser's extension management page
+        4. Enable "Developer mode"
+        5. Click "Load unpacked" and select the extracted folder
+        
+        ### 🔧 Development
+        - Source code: [GitHub Repository](https://github.com/satoshiba/headforge)
+        - Issues: [Report a bug](https://github.com/satoshiba/headforge/issues)
+        - Documentation: [Wiki](https://github.com/satoshiba/headforge/wiki)
+        
+        ---
+        
+        **Full Changelog**: https://github.com/satoshiba/headforge/compare/$TAG_NAME...HEAD
+        EOF
+        
+        # Output the release notes
+        echo "notes<<EOF" >> $GITHUB_OUTPUT
+        cat release-notes.md >> $GITHUB_OUTPUT
+        echo "EOF" >> $GITHUB_OUTPUT
+        
+    - name: Create Release
       uses: softprops/action-gh-release@v1
       with:
+        tag_name: ${{ github.ref_name }}
+        name: HeadForge ${{ github.ref_name }}
+        body: ${{ steps.release-notes.outputs.notes }}
         files: |
-          store/chrome/headforge-chrome.zip
-          store/firefox/headforge-firefox.zip
-          store/edge/headforge-edge.zip
-        generate_release_notes: true
+          release-packages/headforge-chrome.zip
+          release-packages/headforge-firefox.zip
+          release-packages/headforge-edge.zip
         draft: false
-        prerelease: false
+        prerelease: ${{ github.event.inputs.prerelease == 'true' }}
+        generate_release_notes: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Notify Discord
+      if: success()
+      uses: Ilshidur/action-discord@master
+      env:
+        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+      with:
+        args: |
+          🎉 **HeadForge ${{ github.ref_name }} Released!**
+          
+          📦 **Downloads Available:**
+          • [Chrome Web Store](https://chrome.google.com/webstore/detail/headforge/your-extension-id)
+          • [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/headforge/)
+          • [Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/headforge/your-extension-id)
+          
+          🔗 **Repository:** https://github.com/satoshiba/headforge
+          📋 **Changelog:** https://github.com/satoshiba/headforge/releases/tag/${{ github.ref_name }}
+          
+    - name: Update Extension Stores
+      if: success()
+      run: |
+        echo "🚀 Release ${{ github.ref_name }} completed successfully!"
+        echo "📦 Store packages created:"
+        echo "  - Chrome: headforge-chrome.zip"
+        echo "  - Firefox: headforge-firefox.zip"
+        echo "  - Edge: headforge-edge.zip"
+        echo ""
+        echo "📋 Next steps:"
+        echo "1. Upload packages to respective stores"
+        echo "2. Update store descriptions if needed"
+        echo "3. Monitor for user feedback"
+        echo "4. Prepare next release"
+        
+    - name: Cleanup
+      if: always()
+      run: |
+        rm -rf release-packages/
+        rm -f release-notes.md
