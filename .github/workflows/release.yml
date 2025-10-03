@@ -165,7 +165,7 @@ jobs:
         echo "🔄 Users will receive automatic updates through their browsers"
         
     - name: Notify Discord
-      if: success() && secrets.DISCORD_WEBHOOK != ''
+      if: success() && ${{ secrets.DISCORD_WEBHOOK != '' }}
       uses: Ilshidur/action-discord@master
       env:
         DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
