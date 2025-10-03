@@ -164,23 +164,6 @@ jobs:
         echo "📦 Store submission will be triggered automatically"
         echo "🔄 Users will receive automatic updates through their browsers"
         
-    - name: Notify Discord
-      if: success() && ${{ secrets.DISCORD_WEBHOOK != '' }}
-      uses: Ilshidur/action-discord@master
-      env:
-        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-      with:
-        args: |
-          🎉 **HeadForge ${{ github.ref_name }} Released!**
-          
-          📦 **Downloads Available:**
-          • [Chrome Web Store](https://chrome.google.com/webstore/detail/headforge/your-extension-id)
-          • [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/headforge/)
-          • [Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/headforge/your-extension-id)
-          
-          🔗 **Repository:** https://github.com/iyotee/HeadForge
-          📋 **Changelog:** https://github.com/iyotee/HeadForge/releases/tag/${{ github.ref_name }}
-          
     - name: Update Extension Stores
       if: success()
       run: |
