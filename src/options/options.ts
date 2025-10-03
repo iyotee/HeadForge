@@ -2,6 +2,10 @@ import { UserPreferences, Theme } from '@/types';
 import { languageConfigs } from '@/utils/language-configs';
 import { DEFAULT_VALUES, STORAGE_KEYS, SUCCESS_MESSAGES, ERROR_MESSAGES } from '@/utils/constants';
 
+// Import CSS files
+import '../styles/main.css';
+import './options.css';
+
 import { GeneralSettings } from './pages/general';
 import { AppearanceSettings } from './pages/appearance';
 import { TemplatesSettings } from './pages/templates';

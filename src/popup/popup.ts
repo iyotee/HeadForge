@@ -6,6 +6,10 @@ import { ValidationUtils } from '@/utils/validation';
 import { ClipboardUtils } from '@/utils/clipboard';
 import { FileUtils } from '@/utils/file-utils';
 import { UpdateCheckerUI } from './components/update-checker';
+
+// Import CSS files
+import '../styles/main.css';
+import './popup.css';
 import { 
   DEFAULT_VALUES, 
   STORAGE_KEYS, 

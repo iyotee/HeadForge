@@ -106,8 +106,8 @@ export class UpdateChecker {
 // Default configuration
 export const DEFAULT_UPDATE_CONFIG: UpdateCheckerConfig = {
   checkInterval: 24 * 60 * 60 * 1000, // 24 hours
-  githubRepo: 'satoshiba/headforge',
-  currentVersion: '1.0.0'
+  githubRepo: 'iyotee/HeadForge',
+  currentVersion: '1.2.16'
 };
 
 // Global update checker instance
