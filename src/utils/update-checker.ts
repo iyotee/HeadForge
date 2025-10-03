@@ -107,7 +107,7 @@ export class UpdateChecker {
 export const DEFAULT_UPDATE_CONFIG: UpdateCheckerConfig = {
   checkInterval: 24 * 60 * 60 * 1000, // 24 hours
   githubRepo: 'iyotee/HeadForge',
-  currentVersion: '1.2.17'
+  currentVersion: '1.2.22'
 };
 
 // Global update checker instance
